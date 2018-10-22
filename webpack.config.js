@@ -20,7 +20,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
           ]
         }
       }
-    ]
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([

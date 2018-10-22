@@ -31,9 +31,8 @@ class IngredientList extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const input = new FormData(e.target)
     const newIngredient = {
-      ingredient: input.get('ingredient')
+      ingredient: e.target['ingredient'].value
     }
     this.props.addIngredient(newIngredient)
     e.target.reset()
@@ -47,7 +46,7 @@ class IngredientList extends Component {
         <form className={classes.input} onSubmit={this.handleSubmit}>
           <TextField
             className={classes.textField}
-            name="ingredient"
+            id="ingredient"
             label="Add an ingredient"
             margin="normal"
             variant="outlined"

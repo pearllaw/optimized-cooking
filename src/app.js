@@ -12,13 +12,19 @@ export default class Recipes extends Component {
 
   addIngredient(ingredient) {
     const { ingredientList } = this.state
-    const item = Object.assign({}, ingredient)
-    this.setState({ ingredientList: [...ingredientList, item] })
+    fetch('/ingredients', {
+      method: 'POST',
+      body: JSON.stringify(ingredient),
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+    })
+      .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
   }
 
   render () {
     return (
-      <IngredientList addIngredient={this.addIngredient}/>
+      <div>
+        <IngredientList addIngredient={this.addIngredient}/>
+      </div>
     )
   }
 }
