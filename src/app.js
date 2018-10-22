@@ -32,7 +32,6 @@ export default class Recipes extends Component {
     return (
       <div>
         <AddIngredient addIngredient={this.addIngredient}/>
-        <IngredientList ingredientList={this.state.ingredientList}/>
       </div>
     )
   }
