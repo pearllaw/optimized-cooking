@@ -18,6 +18,7 @@ export default class Recipes extends Component {
       body: JSON.stringify(ingredient),
       headers: {'Content-Type': 'application/json; charset=utf-8'}
     })
+      .then(res => res.json())
       .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
   }
 
@@ -31,7 +32,7 @@ export default class Recipes extends Component {
     return (
       <div>
         <AddIngredient addIngredient={this.addIngredient}/>
-        <IngredientList/>
+        <IngredientList ingredientList={this.state.ingredientList}/>
       </div>
     )
   }
