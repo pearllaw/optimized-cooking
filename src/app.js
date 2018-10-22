@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import IngredientList from './list'
+import AddIngredient from './add-ingredient'
+import IngredientList from './list';
 
 export default class Recipes extends Component {
   constructor(props) {
@@ -20,10 +21,17 @@ export default class Recipes extends Component {
       .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
   }
 
+  componentDidMount() {
+    fetch('/ingredients')
+      .then(res => res.json())
+      .then(ingredients => this.setState({ ingredientList: ingredients}))
+  }
+
   render () {
     return (
       <div>
-        <IngredientList addIngredient={this.addIngredient}/>
+        <AddIngredient addIngredient={this.addIngredient}/>
+        <IngredientList/>
       </div>
     )
   }
