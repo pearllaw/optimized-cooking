@@ -1,22 +1,42 @@
-/* roboto-100normal - latin */
-
 import React, { Component } from 'react'
-import 'typeface-roboto'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import AddIcon from '@material-ui/icons/Add'
 
+const styles = {
+  container: {
+    marginTop: 150
+  },
+  textField: {
+    width: 600,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  }
+}
 
-export default class IngredientList extends Component {
+class IngredientList extends Component {
   render() {
+    const { classes } = this.props
     return (
-      <div>
-      <Grid container direction="column" justify="center">
-        <Typography variant="h3">What's in Your Fridge?</Typography>
-
+      <div className={classes.container}>
+      <Grid
+        container
+        direction="column"
+      >
+        <Typography variant="h3" align="center">What's in Your Fridge?</Typography>
+        <TextField
+          className={classes.textField}
+          id="outlined-add-ingredient"
+          label="Add an ingredient"
+          margin="normal"
+          variant="outlined" />
       </Grid>
 
       </div>
     )
   }
 }
+
+export default withStyles(styles)(IngredientList)

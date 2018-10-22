@@ -1,8 +1,7 @@
 require('dotenv/config')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-module.exports = {
+ module.exports = {
   devtool: 'source-map',
   mode: process.env.NODE_ENV || 'development',
   output: {
@@ -20,10 +19,6 @@ module.exports = {
             '@babel/preset-react'
           ]
         }
-      },
-      {
-        test: /\.css$/,
-        use: 'css-loader'
       }
     ]
   },
