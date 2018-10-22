@@ -11,7 +11,7 @@ export default class IngredientList extends Component {
   render() {
     return (
       <div>
-      <Grid container justify="center">
+      <Grid container direction="column" justify="center">
         <Typography variant="h3">What's in Your Fridge?</Typography>
 
       </Grid>
