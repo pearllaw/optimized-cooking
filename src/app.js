@@ -35,7 +35,7 @@ export default class Recipes extends Component {
     const { path } = this.state.view
     const { ingredientList } = this.state
     switch (path) {
-      case 'my-list':
+      case 'list':
         return (
         <Fragment>
           <AddIngredient addIngredient={this.addIngredient} />

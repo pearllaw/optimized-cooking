@@ -15,7 +15,7 @@ const styles = {
     margin: 2 + 'rem'
   },
   textField: {
-    width: 600
+    width: 500
   },
   button: {
     marginTop: 21,
