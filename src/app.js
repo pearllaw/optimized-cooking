@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Nav from './navbar'
 import AddIngredient from './add-ingredient'
 import IngredientList from './list';
 
@@ -31,6 +32,7 @@ export default class Recipes extends Component {
   render () {
     return (
       <div>
+        <Nav/>
         <AddIngredient addIngredient={this.addIngredient}/>
         <IngredientList ingredientList={this.state.ingredientList}/>
       </div>
