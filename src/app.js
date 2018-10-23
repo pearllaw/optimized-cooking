@@ -26,6 +26,10 @@ export default class Recipes extends Component {
   }
 
   componentDidMount() {
+    window.onhashchange = () => {
+      this.setState({ view: hash.parse(location.hash) })
+    }
+
     fetch('/ingredients')
       .then(res => res.json())
       .then(ingredients => this.setState({ ingredientList: ingredients}))

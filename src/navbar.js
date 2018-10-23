@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
-import Tab from '@material-ui/core/Tab'
 import blue from '@material-ui/core/colors/blue'
 
 const styles = {
@@ -15,7 +15,7 @@ const styles = {
     color: 'black'
   },
   tabs: {
-    marginTop: 4
+    marginTop: 10
   }
 }
 
@@ -33,7 +33,7 @@ class Nav extends Component {
               spacing={24}
             >
               <Grid item>
-                <IconButton>
+                <IconButton href="#">
                   <img src="https://png.icons8.com/windows/32/000000/meal.png"
                     width='35px'
                     height='35px'
@@ -41,10 +41,10 @@ class Nav extends Component {
                 </IconButton>
               </Grid>
               <Grid item>
-                <Tab
+                <Button
                   className={classes.tabs}
-                  href="#list"
-                  label="My List"/>
+                  href="#list">My List
+                </Button>
               </Grid>
             </Grid>
           </Toolbar>
