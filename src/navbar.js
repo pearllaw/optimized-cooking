@@ -43,6 +43,7 @@ class Nav extends Component {
               <Grid item>
                 <Tab
                   className={classes.tabs}
+                  href="#my-list"
                   label="My List"/>
               </Grid>
             </Grid>
