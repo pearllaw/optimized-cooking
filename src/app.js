@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import Nav from './navbar'
 import AddIngredient from './add-ingredient'
 import IngredientList from './list'
+import RenderRecipes from './render-recipes'
 import hash from './hash'
 
 export default class Recipes extends Component {
@@ -46,6 +47,8 @@ export default class Recipes extends Component {
           <IngredientList ingredientList={ingredientList} />
         </Fragment>
         )
+      case 'get-recipes':
+        return <RenderRecipes />
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }
