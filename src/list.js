@@ -28,6 +28,14 @@ const theme = createMuiTheme({
 })
 
 class IngredientList extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.getRecipes()
+  }
 
   render() {
     const { classes, ingredientList } = this.props
@@ -53,6 +61,7 @@ class IngredientList extends Component {
             href="#get-recipes"
             variant="contained"
             color="primary"
+            onClick={this.handleClick}
             >Generate Recipes</Button>
         </MuiThemeProvider>
       </Grid>
