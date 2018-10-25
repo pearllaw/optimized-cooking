@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react'
 import Nav from './navbar'
 import AddIngredient from './add-ingredient'
 import IngredientList from './list'
-import RenderRecipes from './render-recipes'
 import hash from './hash'
 
 export default class Recipes extends Component {
@@ -13,6 +12,7 @@ export default class Recipes extends Component {
       view: hash.parse(location.hash)
     }
     this.addIngredient = this.addIngredient.bind(this)
+    this.getRecipes = this.getRecipes.bind(this)
   }
 
   addIngredient(ingredient) {
@@ -24,6 +24,13 @@ export default class Recipes extends Component {
     })
       .then(res => res.json())
       .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
+  }
+
+  getRecipes() {
+    const { ingredientList } = this.state
+    const items = ingredientList.map(item => item.ingredient)
+    fetch(`/recipes?ingredients=${items}`)
+      .then(res => console.log(res.json()))
   }
 
   componentDidMount() {
@@ -48,7 +55,7 @@ export default class Recipes extends Component {
         </Fragment>
         )
       case 'get-recipes':
-        return <RenderRecipes />
+        return this.getRecipes()
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }

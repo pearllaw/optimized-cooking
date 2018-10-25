@@ -28,6 +28,7 @@ const theme = createMuiTheme({
 })
 
 class IngredientList extends Component {
+
   render() {
     const { classes, ingredientList } = this.props
     return (
@@ -48,7 +49,11 @@ class IngredientList extends Component {
       {ingredientList.length > 0 &&
       <Grid item>
         <MuiThemeProvider theme={theme}>
-          <Button className={classes.button} href="#get-recipes" variant="contained" color="primary">Generate Recipes</Button>
+          <Button className={classes.button}
+            href="#get-recipes"
+            variant="contained"
+            color="primary"
+            >Generate Recipes</Button>
         </MuiThemeProvider>
       </Grid>
       }
