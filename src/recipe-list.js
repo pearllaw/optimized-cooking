@@ -6,19 +6,19 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = {
-  root: {
-    padding: 50
+  title: {
+    marginTop: 150,
+    marginBottom: 80
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
-    padding: 50
+    overflow: 'hidden'
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: 1000,
+    height: 500,
     transform:'translateZ(0)'
   },
   titleBar: {
@@ -33,8 +33,8 @@ class ShowRecipes extends Component {
   render() {
     const { classes, recipeImages } = this.props
     return (
-      <div className={classes.root}>
-      <Typography variant="h3" align="center">What Looks Good?</Typography>
+      <div>
+      <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
         <GridList cols={5} cellHeight={'auto'} className={classes.gridList}>
           {recipeImages.map(tile => (
