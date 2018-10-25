@@ -4,28 +4,18 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import green from '@material-ui/core/colors/green'
+import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const styles = {
   list: {
     width: 560,
     border: '1px solid silver',
     borderRadius: '0.25rem'
   },
   button: {
-    color: theme.palette
+    background: 'rgb(80,173,85)'
   }
-})
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
-  },
-  typography: {
-    useNextVariants: true,
-  }
-})
+}
 
 class IngredientList extends Component {
   constructor(props) {
@@ -56,14 +46,11 @@ class IngredientList extends Component {
       </Grid>
       {ingredientList.length > 0 &&
       <Grid item>
-        <MuiThemeProvider theme={theme}>
-          <Button className={classes.button}
-            href="#get-recipes"
-            variant="contained"
-            color="primary"
-            onClick={this.handleClick}
-            >Generate Recipes</Button>
-        </MuiThemeProvider>
+        <Button className={classes.button}
+          href="#get-recipes"
+          variant="contained"
+          onClick={this.handleClick}
+          >Generate Recipes</Button>
       </Grid>
       }
     </Grid>
