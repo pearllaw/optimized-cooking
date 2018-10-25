@@ -8,7 +8,7 @@ const router = server.router('db.json')
 app.use(middleware)
 
 app.get('/recipes', (req, res) => {
-  const query = 'fillIngredients=false&ingredients=' + req.query.ingredients + '&limitLicense=false&number=10&ranking=2'
+  const query = 'fillIngredients=false&ingredients=' + req.query.ingredients + '&limitLicense=false&number=12&ranking=2'
   unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?' + query)
    .header(
      {'X-Mashape-Key': process.env.KEY},

@@ -5,14 +5,12 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
-import blue from '@material-ui/core/colors/blue'
 
 const styles = {
   navigation: {
     textTransform: 'uppercase',
-    background: blue['A100'],
-    boxShadow: 'none',
-    color: 'black'
+    background: 'rgb(43,152,240)',
+    boxShadow: 'none'
   },
   tabs: {
     marginTop: 10

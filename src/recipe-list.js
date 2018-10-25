@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = {
   title: {
-    marginTop: 150,
+    marginTop: 100,
     marginBottom: 80
   },
   container: {
@@ -17,8 +17,8 @@ const styles = {
     overflow: 'hidden'
   },
   gridList: {
-    width: 1000,
-    height: 500,
+    width: 1200,
+    height: 800,
     transform:'translateZ(0)'
   },
   titleBar: {
@@ -30,13 +30,15 @@ const styles = {
 
 class ShowRecipes extends Component {
 
+
   render() {
     const { classes, recipeImages } = this.props
+
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
-        <GridList cols={5} cellHeight={'auto'} className={classes.gridList}>
+        <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
           {recipeImages.map(tile => (
             <GridListTile key={tile.image}>
               <img src={tile.image} alt={tile.title} />
