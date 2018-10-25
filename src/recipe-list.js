@@ -28,29 +28,28 @@ const styles = {
   }
 }
 
-class ShowRecipes extends Component {
-
-  render() {
-    const { classes, recipeImages } = this.props
+function ShowRecipes({classes, recipeImages, getInstructions}) {
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
+      <a href="view-recipe">
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
           {recipeImages.map(tile => (
-            <GridListTile key={tile.image}>
-              <img src={tile.image} alt={tile.title} />
-              <GridListTileBar
-                title={tile.title}
-                titlePosition="top"
-              />
-            </GridListTile>
+              <GridListTile key={tile.image}
+                onClick={getInstructions}>
+                <img src={tile.image} alt={tile.title} id={tile.id}/>
+                <GridListTileBar
+                  title={tile.title}
+                  titlePosition="top"
+                />
+              </GridListTile>
           ))}
         </GridList>
+      </a>
       </div>
       </div>
     )
-  }
 }
 
 export default withStyles(styles)(ShowRecipes)

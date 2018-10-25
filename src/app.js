@@ -4,6 +4,7 @@ import AddIngredient from './add-ingredient'
 import IngredientList from './list'
 import ShowRecipes from './recipe-list'
 import hash from './hash'
+import Instructions from './instructions';
 
 export default class Recipes extends Component {
   constructor(props) {
@@ -11,10 +12,12 @@ export default class Recipes extends Component {
     this.state = {
       ingredientList: [],
       recipeImages: [],
+      instructions: [],
       view: hash.parse(location.hash)
     }
     this.addIngredient = this.addIngredient.bind(this)
     this.getRecipes = this.getRecipes.bind(this)
+    this.getInstructions = this.getInstructions.bind(this)
   }
 
   addIngredient(ingredient) {
@@ -33,16 +36,15 @@ export default class Recipes extends Component {
     const items = ingredientList.map(item => item.ingredient)
     fetch(`/recipes?ingredients=${items}`)
       .then(res => res.json())
-      .then(recipes => {
-        const filtered = []
-        recipes.map(recipe => {
-          filtered.push({title: recipe.title, image: recipe.image})
-        })
-        return filtered
-      })
       .then(result => {
         this.setState({ recipeImages: result })
       })
+  }
+
+  getInstructions(e) {
+    fetch(`/instructions?id=${e.target.id}`)
+      .then(res => console.log(res.json()))
+      .then(result => this.setState({instructions: result}))
   }
 
   componentDidMount() {
@@ -72,6 +74,8 @@ export default class Recipes extends Component {
         )
       case 'get-recipes':
         return <ShowRecipes recipeImages={recipeImages} />
+      case 'view-recipe':
+        return <Instructions getInstructions={this.getInstructions} />
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }
