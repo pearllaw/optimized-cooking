@@ -4,14 +4,14 @@ import AddIngredient from './add-ingredient'
 import IngredientList from './list'
 import ShowRecipes from './recipe-list'
 import hash from './hash'
-import Instructions from './instructions';
+import Instructions from './instructions'
 
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
       ingredientList: [],
-      recipeImages: [],
+      recipes: [],
       instructions: [],
       view: hash.parse(location.hash)
     }
@@ -37,14 +37,15 @@ export default class Recipes extends Component {
     fetch(`/recipes?ingredients=${items}`)
       .then(res => res.json())
       .then(result => {
-        this.setState({ recipeImages: result })
+        this.setState({ recipes: result })
       })
   }
 
   getInstructions(e) {
     fetch(`/instructions?id=${e.target.id}`)
-      .then(res => console.log(res.json()))
-      .then(result => this.setState({instructions: result}))
+      .then(res => res.json())
+      .then(data => data.map(step => step.steps))
+      .then(result => this.setState({ instructions: result }))
   }
 
   componentDidMount() {
@@ -57,13 +58,20 @@ export default class Recipes extends Component {
       .then(ingredients => this.setState({ ingredientList: ingredients },
         () => {
         this.getRecipes()
-        }
-      ))
+        })
+      )
+
+    fetch('/recipes')
+        .then(res => res.json())
+        .then(recipe => this.setState({ recipes: recipe }),
+          () => {
+          this.getInstructions()
+        })
   }
 
   renderView() {
     const { path } = this.state.view
-    const { ingredientList, recipeImages } = this.state
+    const { ingredientList, recipes, instructions } = this.state
     switch (path) {
       case 'list':
         return (
@@ -73,9 +81,9 @@ export default class Recipes extends Component {
         </Fragment>
         )
       case 'get-recipes':
-        return <ShowRecipes recipeImages={recipeImages} />
+        return <ShowRecipes recipes={recipes} getInstructions={this.getInstructions}/>
       case 'view-recipe':
-        return <Instructions getInstructions={this.getInstructions} />
+        return <Instructions instructions={instructions} />
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }

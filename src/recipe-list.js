@@ -28,25 +28,27 @@ const styles = {
   }
 }
 
-function ShowRecipes({classes, recipeImages, getInstructions}) {
+function ShowRecipes({classes, recipes, getInstructions}) {
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
-      <a href="view-recipe">
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
-          {recipeImages.map(tile => (
-              <GridListTile key={tile.image}
-                onClick={getInstructions}>
-                <img src={tile.image} alt={tile.title} id={tile.id}/>
-                <GridListTileBar
-                  title={tile.title}
-                  titlePosition="top"
-                />
-              </GridListTile>
+          {recipes.map(tile => (
+            <GridListTile key={tile.image} id={tile.id}
+              onClick={getInstructions}>
+              <a href="#view-recipe"><img src={tile.image}
+                alt={tile.title}
+                id={tile.id}
+                width="396px"
+                height="235px"/></a>
+              <GridListTileBar
+                title={tile.title}
+                titlePosition="top"
+              />
+            </GridListTile>
           ))}
         </GridList>
-      </a>
       </div>
       </div>
     )
