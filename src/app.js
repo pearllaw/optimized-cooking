@@ -42,9 +42,11 @@ export default class Recipes extends Component {
   }
 
   getInstructions(e) {
-    fetch(`/instructions?id=${e.target.id}`)
+    const id = parseInt(e.target.id, 10)
+    fetch(`/instructions?id=${id}`)
       .then(res => res.json())
       .then(data => data.map(step => step.steps))
+      .then(newArr => newArr[0])
       .then(result => this.setState({ instructions: result }))
   }
 
@@ -63,10 +65,11 @@ export default class Recipes extends Component {
 
     fetch('/recipes')
         .then(res => res.json())
-        .then(recipe => this.setState({ recipes: recipe }),
+        .then(recipes => this.setState({ recipes: recipes },
           () => {
-          this.getInstructions()
-        })
+            this.getInstructions
+          })
+        )
   }
 
   renderView() {
@@ -85,7 +88,7 @@ export default class Recipes extends Component {
       case 'view-recipe':
         return <Instructions instructions={instructions} />
       default:
-        return <AddIngredient addIngredient={this.addIngredient} />
+        return <AddIngredient recipes={recipes} addIngredient={this.addIngredient} />
     }
   }
 

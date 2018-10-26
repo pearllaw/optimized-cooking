@@ -35,7 +35,7 @@ function ShowRecipes({classes, recipes, getInstructions}) {
       <div className={classes.container}>
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
           {recipes.map(tile => (
-            <GridListTile key={tile.image} id={tile.id}
+            <GridListTile key={tile.image}
               onClick={getInstructions}>
               <a href="#view-recipe"><img src={tile.image}
                 alt={tile.title}
