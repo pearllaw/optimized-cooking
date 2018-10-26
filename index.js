@@ -17,6 +17,16 @@ app.get('/recipes', (req, res, next) => {
    .end(result => res.json(result.body))
 })
 
+app.get('/ingred', (req, res, next) => {
+  const query = req.query.id + '/information'
+  unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query)
+    .header(
+      {'X-Mashape-Key': process.env.KEY},
+      {'Accept': 'application/json'}
+    )
+    .end(result => res.json(result.body))
+})
+
 app.get('/instructions', (req, res, next) => {
   const query = req.query.id + '/analyzedInstructions'
   unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query)
