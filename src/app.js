@@ -4,17 +4,21 @@ import AddIngredient from './add-ingredient'
 import IngredientList from './list'
 import ShowRecipes from './recipe-list'
 import hash from './hash'
+import Instructions from './instructions'
 
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
+    const { path, params } = hash.parse(location.hash)
     this.state = {
       ingredientList: [],
-      recipeImages: [],
-      view: hash.parse(location.hash)
+      recipes: [],
+      recipeInfo: null,
+      view: { path, params }
     }
     this.addIngredient = this.addIngredient.bind(this)
     this.getRecipes = this.getRecipes.bind(this)
+    this.getRecipeInfo = this.getRecipeInfo.bind(this)
   }
 
   addIngredient(ingredient) {
@@ -33,21 +37,27 @@ export default class Recipes extends Component {
     const items = ingredientList.map(item => item.ingredient)
     fetch(`/recipes?ingredients=${items}`)
       .then(res => res.json())
-      .then(recipes => {
-        const filtered = []
-        recipes.map(recipe => {
-          filtered.push({title: recipe.title, image: recipe.image})
-        })
-        return filtered
-      })
       .then(result => {
-        this.setState({ recipeImages: result })
+        this.setState({ recipes: result })
       })
+  }
+
+  getRecipeInfo() {
+    const { id } = this.state.view.params
+    fetch(`/ingred?id=${id}`)
+      .then(res => res.json())
+      .then(data => {
+        const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }) =>
+          ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }))(data)
+        return selected
+      })
+      .then(result => this.setState({ recipeInfo: result }))
   }
 
   componentDidMount() {
     window.onhashchange = () => {
-      this.setState({ view: hash.parse(location.hash) })
+      const { path, params } = hash.parse(location.hash)
+      this.setState({ view: { path, params } })
     }
 
     fetch('/ingredients')
@@ -55,23 +65,29 @@ export default class Recipes extends Component {
       .then(ingredients => this.setState({ ingredientList: ingredients },
         () => {
         this.getRecipes()
-        }
-      ))
+        })
+      )
   }
 
   renderView() {
-    const { path } = this.state.view
-    const { ingredientList, recipeImages } = this.state
+    const { path, params } = this.state.view
+    const { ingredientList, recipes, recipeInfo } = this.state
     switch (path) {
       case 'list':
         return (
         <Fragment>
           <AddIngredient addIngredient={this.addIngredient} />
-          <IngredientList ingredientList={ingredientList} getRecipes={this.getRecipes} />
+          <IngredientList ingredientList={ingredientList}
+            getRecipes={this.getRecipes} />
         </Fragment>
         )
       case 'get-recipes':
-        return <ShowRecipes recipeImages={recipeImages} />
+        return <ShowRecipes recipes={recipes} />
+      case 'view-recipe':
+        const { id } = params
+        return <Instructions id={id}
+          recipeInfo={recipeInfo}
+          getRecipeInfo={this.getRecipeInfo}/>
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }

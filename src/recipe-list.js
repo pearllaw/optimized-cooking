@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
-import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
   title: {
@@ -28,18 +28,19 @@ const styles = {
   }
 }
 
-class ShowRecipes extends Component {
-
-  render() {
-    const { classes, recipeImages } = this.props
+function ShowRecipes({ classes, recipes }) {
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
-          {recipeImages.map(tile => (
+          {recipes.map(tile => (
             <GridListTile key={tile.image}>
-              <img src={tile.image} alt={tile.title} />
+              <a href={`#view-recipe?id=${tile.id}`}><img src={tile.image}
+                alt={tile.title}
+                id={tile.id}
+                width="396px"
+                height="235px"/></a>
               <GridListTileBar
                 title={tile.title}
                 titlePosition="top"
@@ -50,7 +51,6 @@ class ShowRecipes extends Component {
       </div>
       </div>
     )
-  }
 }
 
 export default withStyles(styles)(ShowRecipes)
