@@ -9,15 +9,16 @@ import Instructions from './instructions'
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
+    const { path, params } = hash.parse(location.hash)
     this.state = {
       ingredientList: [],
       recipes: [],
-      instructions: [],
-      view: hash.parse(location.hash)
+      recipeInfo: null,
+      view: { path, params }
     }
     this.addIngredient = this.addIngredient.bind(this)
     this.getRecipes = this.getRecipes.bind(this)
-    this.getInstructions = this.getInstructions.bind(this)
+    this.getRecipeInfo = this.getRecipeInfo.bind(this)
   }
 
   addIngredient(ingredient) {
@@ -41,18 +42,22 @@ export default class Recipes extends Component {
       })
   }
 
-  getInstructions(e) {
-    const id = parseInt(e.target.id, 10)
-    fetch(`/instructions?id=${id}`)
+  getRecipeInfo() {
+    const { id } = this.state.view.params
+    fetch(`/ingred?id=${id}`)
       .then(res => res.json())
-      .then(data => data.map(step => step.steps))
-      .then(newArr => newArr[0])
-      .then(result => this.setState({ instructions: result }))
+      .then(data => {
+        const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }) =>
+          ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }))(data)
+        return selected
+      })
+      .then(result => this.setState({ recipeInfo: result }))
   }
 
   componentDidMount() {
     window.onhashchange = () => {
-      this.setState({ view: hash.parse(location.hash) })
+      const { path, params } = hash.parse(location.hash)
+      this.setState({ view: { path, params } })
     }
 
     fetch('/ingredients')
@@ -62,33 +67,29 @@ export default class Recipes extends Component {
         this.getRecipes()
         })
       )
-
-    fetch('/recipes')
-        .then(res => res.json())
-        .then(recipes => this.setState({ recipes: recipes },
-          () => {
-            this.getInstructions
-          })
-        )
   }
 
   renderView() {
-    const { path } = this.state.view
-    const { ingredientList, recipes, instructions } = this.state
+    const { path, params } = this.state.view
+    const { ingredientList, recipes, recipeInfo } = this.state
     switch (path) {
       case 'list':
         return (
         <Fragment>
           <AddIngredient addIngredient={this.addIngredient} />
-          <IngredientList ingredientList={ingredientList} getRecipes={this.getRecipes} />
+          <IngredientList ingredientList={ingredientList}
+            getRecipes={this.getRecipes} />
         </Fragment>
         )
       case 'get-recipes':
-        return <ShowRecipes recipes={recipes} getInstructions={this.getInstructions}/>
+        return <ShowRecipes recipes={recipes} />
       case 'view-recipe':
-        return <Instructions instructions={instructions} />
+        const { id } = params
+        return <Instructions id={id}
+          recipeInfo={recipeInfo}
+          getRecipeInfo={this.getRecipeInfo}/>
       default:
-        return <AddIngredient recipes={recipes} addIngredient={this.addIngredient} />
+        return <AddIngredient addIngredient={this.addIngredient} />
     }
   }
 
