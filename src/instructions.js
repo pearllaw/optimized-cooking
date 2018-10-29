@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader } from '@material-ui/core'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, Avatar } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
@@ -8,6 +8,9 @@ const styles = {
   },
   card: {
     boxShadow: 'none'
+  },
+  icon: {
+    right: 400
   },
   image: {
     padding: 20,
@@ -40,6 +43,11 @@ class Instructions extends Component {
         <Grid item xs={6}>
           <Card className={classes.card}>
             <CardHeader
+              action={
+                <IconButton className={classes.icon}>
+                  <i className="far fa-heart"></i>
+               </IconButton>
+              }
               title={recipeInfo.title}
               subheader={`Servings: ${recipeInfo.servings} ` + `Prep Time: ${recipeInfo.preparationMinutes} minutes`}
             />
