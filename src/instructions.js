@@ -37,6 +37,12 @@ class Instructions extends Component {
 
   handleToggle() {
     this.setState({ clicked: !this.state.clicked })
+    const { recipeInfo } = this.props
+    const recipe = {
+      title: recipeInfo.title,
+      recipeId: recipeInfo.id
+    }
+    this.props.saveRecipe(recipe)
   }
 
   componentWillMount() {
@@ -44,7 +50,7 @@ class Instructions extends Component {
   }
 
   render() {
-    const { recipeInfo, classes } = this.props
+    const { classes, recipeInfo } = this.props
     const { clicked } = this.state
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)

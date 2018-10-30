@@ -12,6 +12,7 @@ export default class Recipes extends Component {
     const { path, params } = hash.parse(location.hash)
     this.state = {
       ingredientList: [],
+      savedRecipes: [],
       recipes: [],
       recipeInfo: null,
       view: { path, params }
@@ -19,6 +20,7 @@ export default class Recipes extends Component {
     this.addIngredient = this.addIngredient.bind(this)
     this.getRecipes = this.getRecipes.bind(this)
     this.getRecipeInfo = this.getRecipeInfo.bind(this)
+    this.saveRecipe = this.saveRecipe.bind(this)
   }
 
   addIngredient(ingredient) {
@@ -47,11 +49,22 @@ export default class Recipes extends Component {
     fetch(`/ingred?id=${id}`)
       .then(res => res.json())
       .then(data => {
-        const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }) =>
-          ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image }))(data)
+        const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }) =>
+          ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }))(data)
         return selected
       })
       .then(result => this.setState({ recipeInfo: result }))
+  }
+
+  saveRecipe(recipe) {
+    const { savedRecipes } = this.state
+    fetch('/saved-recipes', {
+      method: 'POST',
+      body: JSON.stringify(recipe),
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+    })
+    .then(res => res.json())
+    .then(data => this.setState({ savedRecipes: [...savedRecipes, data]}))
   }
 
   componentDidMount() {
@@ -87,7 +100,8 @@ export default class Recipes extends Component {
         const { id } = params
         return <Instructions id={id}
           recipeInfo={recipeInfo}
-          getRecipeInfo={this.getRecipeInfo}/>
+          getRecipeInfo={this.getRecipeInfo}
+          saveRecipe={this.saveRecipe} />
       default:
         return <AddIngredient addIngredient={this.addIngredient} />
     }
