@@ -9,9 +9,6 @@ const styles = {
   card: {
     boxShadow: 'none'
   },
-  icon: {
-    right: 400
-  },
   image: {
     padding: 20,
     height: 300,
@@ -21,7 +18,8 @@ const styles = {
     boxShadow: 'none',
     marginTop: 80,
     maxHeight: 300,
-    overflow: 'auto'
+    overflow: 'auto',
+    padding: 25
   },
   directions: {
     boxShadow: 'none'
@@ -29,13 +27,25 @@ const styles = {
 }
 
 class Instructions extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      clicked: false
+    }
+    this.handleToggle = this.handleToggle.bind(this)
+  }
 
-  componentDidMount() {
+  handleToggle() {
+    this.setState({ clicked: !this.state.clicked })
+  }
+
+  componentWillMount() {
     this.props.getRecipeInfo()
   }
 
   render() {
     const { recipeInfo, classes } = this.props
+    const { clicked } = this.state
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
     return (
@@ -43,13 +53,13 @@ class Instructions extends Component {
         <Grid item xs={6}>
           <Card className={classes.card}>
             <CardHeader
-              action={
-                <IconButton className={classes.icon}>
-                  <i className="far fa-heart"></i>
-               </IconButton>
-              }
               title={recipeInfo.title}
               subheader={`Servings: ${recipeInfo.servings} ` + `Prep Time: ${recipeInfo.preparationMinutes} minutes`}
+              action={
+                <IconButton onClick={this.handleToggle}>
+                  {clicked === false ? <i className="far fa-heart"></i> : <i className="fas fa-heart"></i>}
+               </IconButton>
+              }
             />
             <CardMedia
               className={classes.image}
