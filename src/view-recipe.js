@@ -16,14 +16,11 @@ export default class ViewRecipe extends Component {
     this.getRecipeInfo = this.getRecipeInfo.bind(this)
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
+    this.updateSavedRecipes = this.updateSavedRecipes.bind(this)
   }
 
   handleClick() {
-    const { isFavorited } = this.state
     this.setState({ isFavorited: !this.state.isFavorited })
-    isFavorited === !true
-      ? this.saveRecipe()
-      : this.deleteRecipe()
   }
 
   getRecipeInfo() {
@@ -55,29 +52,46 @@ export default class ViewRecipe extends Component {
       )
   }
 
-  deleteRecipe(e) {
-    console.log(e.target.id)
-    const { id } = parseInt(e.target.id, 10)
-    const { savedRecipes } = this.state
-    const updatedRecipeList = savedRecipes.filter(recipe => recipe.recipeId !== id)
-    fetch(`/my-recipes/${e.target.id}`, {
-      method: 'DELETE'
-    })
-    this.setState({ savedRecipes: updatedRecipeList })
+  deleteRecipe() {
+    const { id } = this.state.view.params
+    fetch(`/my-recipes?recipeId=${id}`)
+      .then(res => res.json())
+      .then(data => {
+        const dataId = data[0].id
+        return fetch(`/my-recipes/${dataId}`, {
+          method: 'DELETE'
+        })
+      })
+      .then(() => this.updateSavedRecipes())
+  }
+
+  updateSavedRecipes() {
+    fetch('my-recipes')
+      .then(res => res.json())
+      .then(updated => this.setState({ savedRecipes: updated }))
   }
 
   componentDidMount() {
     const { id } = this.state.view.params
-    Promise.all([
-      this.getRecipeInfo(),
-      fetch(`/my-recipes?recipeId=${id}`)
+    const { savedRecipes } = this.state
+
+    if (savedRecipes.length > 0) {
+      Promise.all([
+      fetch(`/ingred?id=${id}`).then(res => res.json()),
+      fetch(`/my-recipes?recipeId=${id}`).then(res => res.json())
       ])
-      .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
       .then(([data, favorited]) => this.setState({
         recipeInfo: data,
-        isFavorited: favorited.saved
+        isFavorited: favorited[0].saved
       }))
+    }
+    else {
+      this.getRecipeInfo()
+    }
 
+    fetch('/my-recipes')
+      .then(res => res.json())
+      .then(recipes => this.setState({ savedRecipes: recipes }))
   }
 
   render() {
@@ -86,7 +100,10 @@ export default class ViewRecipe extends Component {
       <Instructions handleClick={this.handleClick}
         getRecipeInfo={this.getRecipeInfo}
         recipeInfo={recipeInfo}
-        isFavorited={isFavorited} />
+        isFavorited={isFavorited}
+        saveRecipe={this.saveRecipe}
+        deleteRecipe={this.deleteRecipe}
+        updateSavedRecipes={this.updateSavedRecipes} />
     )
   }
 }

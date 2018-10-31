@@ -26,7 +26,7 @@ const styles = {
   }
 }
 
-function Instructions({ classes, recipeInfo, handleClick, isFavorited }) {
+function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
     return (
@@ -39,8 +39,8 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited }) {
               action={
                 <IconButton onClick={handleClick}>
                   {isFavorited === false
-                    ?  <i className="far fa-heart"></i>
-                    : <i className="fas fa-heart"></i>
+                    ?  <i className="far fa-heart" onClick={saveRecipe}></i>
+                    : <i className="fas fa-heart" onClick={deleteRecipe}></i>
                   }
                 </IconButton>
               }
