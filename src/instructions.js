@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, Avatar } from '@material-ui/core'
+import React from 'react'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
@@ -26,32 +26,7 @@ const styles = {
   }
 }
 
-class Instructions extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      clicked: false
-    }
-    this.handleToggle = this.handleToggle.bind(this)
-  }
-
-  handleToggle() {
-    this.setState({ clicked: !this.state.clicked })
-    const { recipeInfo } = this.props
-    const recipe = {
-      title: recipeInfo.title,
-      recipeId: recipeInfo.id
-    }
-    this.props.saveRecipe(recipe)
-  }
-
-  componentWillMount() {
-    this.props.getRecipeInfo()
-  }
-
-  render() {
-    const { classes, recipeInfo } = this.props
-    const { clicked } = this.state
+function Instructions({ classes, recipeInfo, handleClick, isFavorited }) {
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
     return (
@@ -62,9 +37,12 @@ class Instructions extends Component {
               title={recipeInfo.title}
               subheader={`Servings: ${recipeInfo.servings} ` + `Prep Time: ${recipeInfo.preparationMinutes} minutes`}
               action={
-                <IconButton onClick={this.handleToggle}>
-                  {clicked === false ? <i className="far fa-heart"></i> : <i className="fas fa-heart"></i>}
-               </IconButton>
+                <IconButton onClick={handleClick}>
+                  {isFavorited === false
+                    ?  <i className="far fa-heart"></i>
+                    : <i className="fas fa-heart"></i>
+                  }
+                </IconButton>
               }
             />
             <CardMedia
@@ -74,8 +52,8 @@ class Instructions extends Component {
               image={recipeInfo.image}
             />
           </Card>
-          </Grid>
-          <Grid item xs={6}>
+        </Grid>
+        <Grid item xs={6}>
             <Card className={classes.ingredients}>
               <CardContent>
                 <Typography variant="h6">Ingredients</Typography>
@@ -104,8 +82,7 @@ class Instructions extends Component {
             </Card>
           </Grid>
       </Grid>
-    )
-  }
+  )
 }
 
 export default withStyles(styles)(Instructions)

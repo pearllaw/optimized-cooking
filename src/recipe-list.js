@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
@@ -28,7 +28,7 @@ const styles = {
   }
 }
 
-function ShowRecipes({ classes, recipes }) {
+function RecipeList({ classes, recipes }) {
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
@@ -53,4 +53,4 @@ function ShowRecipes({ classes, recipes }) {
     )
 }
 
-export default withStyles(styles)(ShowRecipes)
+export default withStyles(styles)(RecipeList)
