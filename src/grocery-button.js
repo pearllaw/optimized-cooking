@@ -1,13 +1,12 @@
 import React from 'react'
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
+import { withStyles, MuiThemeProvider, createMuiTheme, Button, Grid } from '@material-ui/core'
 import green from '@material-ui/core/colors/green'
 
 const styles = theme => ({
   button: {
     color: theme.palette,
     float: 'right',
-    margin: 30
+    marginRight: 90
   }
 })
 
@@ -23,9 +22,13 @@ const theme = createMuiTheme({
 function GroceryButton({ classes }) {
   return (
     <MuiThemeProvider theme={theme}>
-      <Button className={classes.button}
-        variant="contained"
-        color="primary">Create Grocery List</Button>
+    <Grid container>
+      <Grid item xs={12}>
+        <Button className={classes.button}
+          variant="contained"
+          color="primary">Create Grocery List</Button>
+      </Grid>
+    </Grid>
     </MuiThemeProvider>
   )
 }
