@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import { withStyles, Grid, Typography, List, ListItem, ListItemText } from '@material-ui/core'
-import hash from './hash'
-// import ViewRecipe from './view-recipe'
 
 const styles = {
   container: {
@@ -10,29 +8,21 @@ const styles = {
   list: {
     width: 560,
     marginTop: 40,
-    border: '1px solid silver',
+    backgroundColor: 'azure',
     borderRadius: '0.25rem'
   },
-  listReq: {
-    borderTop: '1px solid silver'
+  link: {
+    textDecoration: 'none'
   }
 }
 
 class RecipeCollection extends Component {
   constructor(props) {
     super(props)
-    const { path, params } = hash.parse(location.hash)
     this.state = {
-      savedRecipes: [],
-      view: { path, params }
+      savedRecipes: []
     }
-    // this.getRecipeInstructions = this.getRecipeInstructions.bind(this)
   }
-
-  // getRecipeInstructions() {
-  //   const { id } = this.state.view.params
-  //   return <ViewRecipe id={id}/>
-  // }
 
   componentDidMount() {
     fetch('/my-recipes')
@@ -53,12 +43,12 @@ class RecipeCollection extends Component {
         <Typography variant="h3" align="center">My Recipes</Typography>
         <Grid item>
           <List className={classes.list}>
-          {savedRecipes.map((recipe, index) => {
-          return <ListItem key={index}
-            id={recipe.recipeId}
-            className={savedRecipes.length > 1 ? classes.listReq : null}
-          >
-            <ListItemText primary={recipe.title} onClick={this.getRecipeInstructions}/>
+          {savedRecipes.map(recipe => {
+          return <ListItem key={recipe.recipeId} divider>
+            <a href={`#view-recipe?id=${recipe.recipeId}`}
+              className={classes.link}>
+              <ListItemText primary={recipe.title} />
+            </a>
           </ListItem>
           })}
         </List>
