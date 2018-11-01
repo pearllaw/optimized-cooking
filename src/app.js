@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react'
 import Nav from './navbar'
+import hash from './hash'
 import AddIngredient from './add-ingredient'
 import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
-import hash from './hash'
+import RecipeCollection from './recipe-collection'
 
 
 export default class Recipes extends Component {
@@ -32,6 +33,8 @@ export default class Recipes extends Component {
       case 'view-recipe':
         const { id } = params
         return <ViewRecipe id={id} />
+      case 'recipe-collection':
+        return <RecipeCollection />
       default:
         return <AddIngredient />
     }

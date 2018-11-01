@@ -19,7 +19,7 @@ function Nav ({ classes }) {
       <AppBar position="static">
         <Toolbar>
           <Button color="inherit" href="#list">My List</Button>
-          <Button color="inherit" href="#recipe-collection">My Recipes</Button>
+          <Button color="inherit" href="#recipe-collection">Recipes</Button>
         </Toolbar>
       </AppBar>
     </div>
