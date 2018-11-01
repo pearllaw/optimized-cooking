@@ -1,3 +1,32 @@
 {
-  "ingredients": []
+  "ingredients": [
+    {
+      "ingredient": "Cheese",
+      "id": 1
+    },
+    {
+      "ingredient": "Eggs",
+      "id": 2
+    },
+    {
+      "ingredient": "Bacon",
+      "id": 3
+    },
+    {
+      "ingredient": "Ham",
+      "id": 4
+    },
+    {
+      "ingredient": "Flour",
+      "id": 5
+    }
+  ],
+  "my-recipes": [
+    {
+      "title": "Baked Ham and Cheese Omelet Roll",
+      "recipeId": 141623,
+      "saved": true,
+      "id": 2
+    }
+  ]
 }

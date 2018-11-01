@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -17,19 +17,8 @@ const styles = {
   }
 }
 
-class IngredientList extends Component {
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick() {
-    this.props.getRecipes()
-  }
-
-  render() {
-    const { classes, ingredientList } = this.props
-    return (
+function IngredientList({ classes, ingredientList, handleClick }) {
+  return (
     <Grid container
       alignItems="center"
       direction="column"
@@ -49,13 +38,12 @@ class IngredientList extends Component {
         <Button className={classes.button}
           href="#get-recipes"
           variant="contained"
-          onClick={this.handleClick}
+          onClick={handleClick}
           >Generate Recipes</Button>
       </Grid>
       }
     </Grid>
-    )
-  }
+  )
 }
 
 export default withStyles(styles)(IngredientList)

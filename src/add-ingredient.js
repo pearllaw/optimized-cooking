@@ -1,32 +1,16 @@
-import React, { Component } from 'react'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import AddIcon from '@material-ui/icons/Add'
-import { withStyles } from '@material-ui/core/styles'
+import React, { Component, Fragment } from 'react'
+import IngredientForm from './ingredient-form'
+import IngredientList from './ingredient-list'
 
-const styles = {
-  container: {
-    marginTop: 150,
-    textAlign: 'center'
-  },
-  input: {
-    display: 'inline-block',
-    margin: 2 + 'rem'
-  },
-  textField: {
-    width: 500
-  },
-  button: {
-    marginTop: 21,
-    marginLeft: 25
-  }
-}
-
-class AddIngredient extends Component {
+export default class AddIngredient extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      ingredientList: []
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.addIngredient = this.addIngredient.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleSubmit(e) {
@@ -34,36 +18,38 @@ class AddIngredient extends Component {
     const newIngredient = {
       ingredient: e.target['ingredient'].value
     }
-    this.props.addIngredient(newIngredient)
+    this.addIngredient(newIngredient)
     e.target.reset()
   }
 
+  addIngredient(ingredient) {
+    const { ingredientList } = this.state
+    fetch('/ingredients', {
+      method: 'POST',
+      body: JSON.stringify(ingredient),
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+    })
+      .then(res => res.json())
+      .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
+  }
+
+  handleClick() {
+    this.props.getRecipes()
+  }
+
+  componentDidMount() {
+    fetch('/ingredients')
+      .then(res => res.json())
+      .then(ingredients => this.setState({ ingredientList: ingredients }))
+  }
+
   render() {
-    const { classes } = this.props
+    const { ingredientList } = this.state
     return (
-      <div className={classes.container}>
-        <Typography variant="h3" align="center">What's in Your Fridge?</Typography>
-        <form className={classes.input} onSubmit={this.handleSubmit}>
-          <TextField
-            className={classes.textField}
-            id="ingredient"
-            label="Add an ingredient"
-            margin="normal"
-            variant="outlined"
-            required />
-          <Button
-            className={classes.button}
-            type="submit"
-            variant="fab"
-            mini
-            color="primary"
-            aria-label="add">
-            <AddIcon/>
-          </Button>
-        </form>
-      </div>
+      <Fragment>
+        <IngredientForm handleSubmit={this.handleSubmit} />
+        <IngredientList ingredientList={ingredientList} handleClick={this.handleClick} />
+      </Fragment>
     )
   }
 }
-
-export default withStyles(styles)(AddIngredient)

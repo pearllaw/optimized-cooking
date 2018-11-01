@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader } from '@material-ui/core'
+import React from 'react'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
@@ -11,28 +11,22 @@ const styles = {
   },
   image: {
     padding: 20,
-    height: 300,
-    width: 570
+    maxHeight: 350,
+    maxWidth: 586
   },
   ingredients: {
     boxShadow: 'none',
     marginTop: 80,
     maxHeight: 300,
-    overflow: 'auto'
+    overflow: 'auto',
+    padding: 25
   },
   directions: {
     boxShadow: 'none'
   }
 }
 
-class Instructions extends Component {
-
-  componentDidMount() {
-    this.props.getRecipeInfo()
-  }
-
-  render() {
-    const { recipeInfo, classes } = this.props
+function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
     return (
@@ -42,6 +36,14 @@ class Instructions extends Component {
             <CardHeader
               title={recipeInfo.title}
               subheader={`Servings: ${recipeInfo.servings} ` + `Prep Time: ${recipeInfo.preparationMinutes} minutes`}
+              action={
+                <IconButton onClick={handleClick}>
+                  {isFavorited === false
+                    ?  <i className="far fa-heart" onClick={saveRecipe}></i>
+                    : <i className="fas fa-heart" onClick={deleteRecipe}></i>
+                  }
+                </IconButton>
+              }
             />
             <CardMedia
               className={classes.image}
@@ -50,8 +52,8 @@ class Instructions extends Component {
               image={recipeInfo.image}
             />
           </Card>
-          </Grid>
-          <Grid item xs={6}>
+        </Grid>
+        <Grid item xs={6}>
             <Card className={classes.ingredients}>
               <CardContent>
                 <Typography variant="h6">Ingredients</Typography>
@@ -80,8 +82,7 @@ class Instructions extends Component {
             </Card>
           </Grid>
       </Grid>
-    )
-  }
+  )
 }
 
 export default withStyles(styles)(Instructions)
