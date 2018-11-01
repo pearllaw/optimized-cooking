@@ -98,13 +98,13 @@ export default class ViewRecipe extends Component {
   render() {
     const { recipeInfo, isFavorited } = this.state
     return (
-      <Instructions handleClick={this.handleClick}
-        getRecipeInfo={this.getRecipeInfo}
-        recipeInfo={recipeInfo}
-        isFavorited={isFavorited}
-        saveRecipe={this.saveRecipe}
-        deleteRecipe={this.deleteRecipe}
-        updateSavedRecipes={this.updateSavedRecipes} />
+        <Instructions handleClick={this.handleClick}
+          getRecipeInfo={this.getRecipeInfo}
+          recipeInfo={recipeInfo}
+          isFavorited={isFavorited}
+          saveRecipe={this.saveRecipe}
+          deleteRecipe={this.deleteRecipe}
+          updateSavedRecipes={this.updateSavedRecipes} />
     )
   }
 }

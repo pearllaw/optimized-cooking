@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
   container: {
-    marginTop: 150,
+    marginTop: 100,
     textAlign: 'center'
   },
   input: {
