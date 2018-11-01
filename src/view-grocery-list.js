@@ -22,7 +22,23 @@ class GroceryList extends Component {
   render() {
     const { classes } = this.props
     return (
-     <div>Hello</div>
+      <Grid container
+      alignItems="center"
+      direction="column"
+      spacing={40}
+      className={classes.container}
+      >
+      <Typography variant="h3" align="center">Grocery List</Typography>
+        <Grid item>
+          <List className={classes.list}>
+          {items.map((item, index) => {
+          return <ListItem key={index}>
+              <ListItemText primary={item.ingredient} />
+          </ListItem>
+          })}
+          </List>
+        </Grid>
+      </Grid>
     )
   }
 }
