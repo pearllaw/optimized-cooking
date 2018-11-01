@@ -21,7 +21,7 @@ export default class GeneratedRecipes extends Component {
       })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('/ingredients')
       .then(res => res.json())
       .then(ingredients => this.setState({ ingredientList: ingredients },

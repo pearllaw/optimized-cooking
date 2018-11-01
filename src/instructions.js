@@ -11,8 +11,8 @@ const styles = {
   },
   image: {
     padding: 20,
-    height: 300,
-    width: 570
+    maxHeight: 350,
+    maxWidth: 586
   },
   ingredients: {
     boxShadow: 'none',
