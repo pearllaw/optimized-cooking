@@ -24,7 +24,9 @@ function IngredientList({ classes, ingredientList, handleClick, deleteIngredient
           {ingredientList.map(item => {
             return <ListItem key={item.id}>
               <ListItemText primary={item.ingredient}/>
-              <i class="material-icons" onClick={deleteIngredient}>clear</i>
+              <i className="material-icons"
+                id={item.id}
+                onClick={deleteIngredient}>clear</i>
             </ListItem>
           })}
           </List>
