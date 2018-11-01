@@ -17,6 +17,7 @@ export default class ViewRecipe extends Component {
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
     this.updateSavedRecipes = this.updateSavedRecipes.bind(this)
+    // this.resolve = this.resolve.bind(this)
   }
 
   handleClick() {
@@ -56,42 +57,55 @@ export default class ViewRecipe extends Component {
     const { id } = this.state.view.params
     fetch(`/my-recipes?recipeId=${id}`)
       .then(res => res.json())
-      .then(data => {
-        const dataId = data[0].id
+      .then(data => data.map(recipe => {
+        const dataId = recipe.id
         return fetch(`/my-recipes/${dataId}`, {
           method: 'DELETE'
         })
-      })
+      }))
       .then(() => this.updateSavedRecipes())
   }
 
   updateSavedRecipes() {
-    fetch('my-recipes')
+    fetch('/my-recipes')
       .then(res => res.json())
       .then(updated => this.setState({ savedRecipes: updated }))
   }
 
+  // resolve() {
+  //   const { id } = this.state.view.params
+  //   fetch('/my-recipes')
+  //     .then(res => res.json())
+  //     .then(data => data.map(item => item.recipeId))
+  //     .then(result => {
+  //       const found = result.filter(recipeId => recipeId.toString() === id)
+  //       console.log(found.toString())
+  //     })
+
+  // }
+
   componentDidMount() {
     const { id } = this.state.view.params
-    const { savedRecipes } = this.state
-
-    if (savedRecipes.length > 0) {
-      Promise.all([
-      fetch(`/ingred?id=${id}`).then(res => res.json()),
-      fetch(`/my-recipes?recipeId=${id}`).then(res => res.json())
-      ])
-      .then(([data, favorited]) => this.setState({
-        recipeInfo: data,
-        isFavorited: favorited[0].saved
-      }))
-    }
-    else {
-      this.getRecipeInfo()
-    }
-
     fetch('/my-recipes')
       .then(res => res.json())
-      .then(recipes => this.setState({ savedRecipes: recipes }))
+      .then(data => data.map(item => item.recipeId))
+      .then(result => {
+        return result.filter(recipeId => recipeId.toString() === id).toString()
+          ? Promise.all([
+            fetch(`/ingred?id=${id}`).then(res => res.json()),
+            fetch(`/my-recipes?recipeId=${id}`).then(res => res.json())
+              .then(data => {
+                return Boolean(data.map(id => id.saved))
+              })
+            ])
+            .then(([data, favorited]) => this.setState({
+              recipeInfo: data,
+              isFavorited: favorited
+            }))
+          : this.getRecipeInfo()
+      })
+
+    this.updateSavedRecipes()
   }
 
   render() {
