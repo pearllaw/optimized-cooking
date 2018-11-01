@@ -4,8 +4,8 @@ import hash from './hash'
 import Ingredients from './ingredients'
 import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
-import RecipeCollection from './recipe-collection'
-
+import RecipeCollection from './view-recipe-collection'
+import GroceryList from './view-grocery-list'
 
 export default class Recipes extends Component {
   constructor(props) {
@@ -35,6 +35,8 @@ export default class Recipes extends Component {
         return <ViewRecipe id={id} />
       case 'recipe-collection':
         return <RecipeCollection />
+      case 'grocery-list':
+        return <GroceryList />
       default:
         return <Ingredients />
     }
