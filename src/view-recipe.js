@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import hash from './hash'
 import Instructions from './instructions'
+import GroceryButton from './grocery-button'
 
 export default class ViewRecipe extends Component {
   constructor(props) {
@@ -98,6 +99,7 @@ export default class ViewRecipe extends Component {
   render() {
     const { recipeInfo, isFavorited } = this.state
     return (
+      <Fragment>
         <Instructions handleClick={this.handleClick}
           getRecipeInfo={this.getRecipeInfo}
           recipeInfo={recipeInfo}
@@ -105,6 +107,8 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
+        <GroceryButton />
+      </Fragment>
     )
   }
 }
