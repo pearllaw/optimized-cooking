@@ -17,7 +17,6 @@ export default class ViewRecipe extends Component {
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
     this.updateSavedRecipes = this.updateSavedRecipes.bind(this)
-    // this.resolve = this.resolve.bind(this)
   }
 
   handleClick() {
@@ -71,18 +70,6 @@ export default class ViewRecipe extends Component {
       .then(res => res.json())
       .then(updated => this.setState({ savedRecipes: updated }))
   }
-
-  // resolve() {
-  //   const { id } = this.state.view.params
-  //   fetch('/my-recipes')
-  //     .then(res => res.json())
-  //     .then(data => data.map(item => item.recipeId))
-  //     .then(result => {
-  //       const found = result.filter(recipeId => recipeId.toString() === id)
-  //       console.log(found.toString())
-  //     })
-
-  // }
 
   componentDidMount() {
     const { id } = this.state.view.params
