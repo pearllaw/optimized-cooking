@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import IngredientForm from './ingredient-form'
 import IngredientList from './ingredient-list'
 
-export default class AddIngredient extends Component {
+export default class Ingredients extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -10,6 +10,7 @@ export default class AddIngredient extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addIngredient = this.addIngredient.bind(this)
+    this.deleteIngredient = this.deleteIngredient.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -33,6 +34,16 @@ export default class AddIngredient extends Component {
       .then(item => this.setState({ ingredientList: [...ingredientList, item] }))
   }
 
+  deleteIngredient(e) {
+    const { ingredientList } = this.state
+    const updatedList = ingredientList.filter(item => item.id !== parseInt(e.target.id, 10))
+    fetch(`/ingredients/${e.target.id}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+    this.setState({ ingredientList: updatedList })
+  }
+
   handleClick() {
     this.props.getRecipes()
   }
@@ -48,7 +59,9 @@ export default class AddIngredient extends Component {
     return (
       <Fragment>
         <IngredientForm handleSubmit={this.handleSubmit} />
-        <IngredientList ingredientList={ingredientList} handleClick={this.handleClick} />
+        <IngredientList ingredientList={ingredientList}
+          handleClick={this.handleClick}
+          deleteIngredient={this.deleteIngredient} />
       </Fragment>
     )
   }

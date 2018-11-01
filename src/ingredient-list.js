@@ -1,10 +1,5 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Button from '@material-ui/core/Button'
-import { withStyles } from '@material-ui/core/styles'
+import {Grid, List, ListItem, ListItemText, Button, withStyles} from '@material-ui/core'
 
 const styles = {
   list: {
@@ -17,7 +12,7 @@ const styles = {
   }
 }
 
-function IngredientList({ classes, ingredientList, handleClick }) {
+function IngredientList({ classes, ingredientList, handleClick, deleteIngredient }) {
   return (
     <Grid container
       alignItems="center"
@@ -29,6 +24,9 @@ function IngredientList({ classes, ingredientList, handleClick }) {
           {ingredientList.map(item => {
             return <ListItem key={item.id}>
               <ListItemText primary={item.ingredient}/>
+              <i className="material-icons"
+                id={item.id}
+                onClick={deleteIngredient}>clear</i>
             </ListItem>
           })}
           </List>

@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import Nav from './navbar'
 import hash from './hash'
-import AddIngredient from './add-ingredient'
+import Ingredients from './ingredients'
 import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
 import RecipeCollection from './recipe-collection'
@@ -27,7 +27,7 @@ export default class Recipes extends Component {
     const { path, params } = this.state.view
     switch (path) {
       case 'list':
-        return <AddIngredient />
+        return <Ingredients />
       case 'get-recipes':
         return <GeneratedRecipes />
       case 'view-recipe':
@@ -36,7 +36,7 @@ export default class Recipes extends Component {
       case 'recipe-collection':
         return <RecipeCollection />
       default:
-        return <AddIngredient />
+        return <Ingredients />
     }
   }
 
