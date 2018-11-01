@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-function IngredientList({ classes, ingredientList, handleClick }) {
+function IngredientList({ classes, ingredientList, handleClick, deleteIngredient }) {
   return (
     <Grid container
       alignItems="center"
@@ -24,7 +24,7 @@ function IngredientList({ classes, ingredientList, handleClick }) {
           {ingredientList.map(item => {
             return <ListItem key={item.id}>
               <ListItemText primary={item.ingredient}/>
-              <i class="material-icons">create</i>
+              <i class="material-icons" onClick={deleteIngredient}>clear</i>
             </ListItem>
           })}
           </List>
