@@ -98,6 +98,7 @@ export default class ViewRecipe extends Component {
 
   render() {
     const { recipeInfo, isFavorited } = this.state
+    const { id } = this.state.view.params
     return (
       <Fragment>
         <Instructions handleClick={this.handleClick}
@@ -107,7 +108,7 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-        <GroceryButton />
+        <a href={`#grocery-list?id=${id}`}><GroceryButton /></a>
       </Fragment>
     )
   }

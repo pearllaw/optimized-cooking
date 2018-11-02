@@ -19,16 +19,17 @@ const theme = createMuiTheme({
   }
 })
 
-function GroceryButton({ classes }) {
+function GroceryButton ({ classes }) {
   return (
     <MuiThemeProvider theme={theme}>
-    <Grid container>
-      <Grid item xs={12}>
-        <Button className={classes.button}
-          variant="contained"
-          color="primary">Create Grocery List</Button>
+      <Grid container>
+        <Grid item xs={12}>
+          <Button className={classes.button}
+            variant="contained"
+            color="primary"
+            >Create Grocery List</Button>
+        </Grid>
       </Grid>
-    </Grid>
     </MuiThemeProvider>
   )
 }

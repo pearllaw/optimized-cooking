@@ -5,7 +5,7 @@ import Ingredients from './ingredients'
 import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
 import RecipeCollection from './view-recipe-collection'
-import GroceryList from './view-grocery-list'
+import ViewGroceries from './view-grocery-list'
 
 export default class Recipes extends Component {
   constructor(props) {
@@ -25,18 +25,18 @@ export default class Recipes extends Component {
 
   renderView() {
     const { path, params } = this.state.view
+    const { id } = params
     switch (path) {
       case 'list':
         return <Ingredients />
       case 'get-recipes':
         return <GeneratedRecipes />
       case 'view-recipe':
-        const { id } = params
         return <ViewRecipe id={id} />
       case 'recipe-collection':
         return <RecipeCollection />
       case 'grocery-list':
-        return <GroceryList />
+        return <ViewGroceries id={id} />
       default:
         return <Ingredients />
     }
