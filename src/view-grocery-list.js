@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import GroceryList from './grocery-list'
 import hash from './hash'
-import { Typography } from '@material-ui/core'
 
 export default class ViewGroceries extends Component {
   constructor(props) {
@@ -11,6 +10,16 @@ export default class ViewGroceries extends Component {
       groceries: [],
       view: { path, params}
     }
+    this.handleCheck = this.handleCheck.bind(this)
+  }
+
+  handleCheck(index) {
+    const checked = this.state.groceries.map((item, itemIndex) =>
+      itemIndex === index
+        ? Object.assign({}, item, { checked: !item.checked })
+        : item
+    )
+    this.setState({ groceries: checked })
   }
 
   componentDidMount() {
@@ -40,13 +49,15 @@ export default class ViewGroceries extends Component {
       const newArr = data.map(word => word.charAt(0).toUpperCase() + word.substr(1))
       return newArr
       })
-    .then(res => this.setState({ groceries: res }))
+    .then(list => list.map(item => Object.assign({}, {item: item}, {checked: false})))
+    .then(groceryItem => this.setState({ groceries: groceryItem }))
   }
 
   render() {
     const { groceries } = this.state
     return (
-      <GroceryList groceries={groceries} />
+      <GroceryList groceries={groceries}
+        handleCheck={this.handleCheck} />
     )
   }
 }
