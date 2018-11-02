@@ -44,11 +44,13 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           </List>
         </Grid>
         <Grid item>
+          {groceries.every(grocery => grocery.checked === true) &&
           <MuiThemeProvider theme={theme}>
             <Button className={classes.button}
               color="primary"
               variant="contained">Make Recipe</Button>
           </MuiThemeProvider>
+          }
         </Grid>
       </Grid>
     )
