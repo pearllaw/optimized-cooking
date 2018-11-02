@@ -6,6 +6,7 @@ import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
 import RecipeCollection from './view-recipe-collection'
 import ViewGroceries from './view-grocery-list'
+import MakeRecipe from './make-recipe'
 
 export default class Recipes extends Component {
   constructor(props) {
@@ -37,6 +38,8 @@ export default class Recipes extends Component {
         return <RecipeCollection />
       case 'grocery-list':
         return <ViewGroceries id={id} />
+      case 'instructions':
+        return <MakeRecipe />
       default:
         return <Ingredients />
     }

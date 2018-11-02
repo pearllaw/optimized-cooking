@@ -48,7 +48,8 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           <MuiThemeProvider theme={theme}>
             <Button className={classes.button}
               color="primary"
-              variant="contained">Make Recipe</Button>
+              variant="contained"
+              href="#instructions">Make Recipe</Button>
           </MuiThemeProvider>
           }
         </Grid>
