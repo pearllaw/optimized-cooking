@@ -1,24 +1,12 @@
 import React from 'react'
-import { withStyles, MuiThemeProvider, createMuiTheme, Grid, Typography, List, ListItem, ListItemText, Checkbox, Button } from '@material-ui/core'
-import blue from '@material-ui/core/colors/blue'
+import { withStyles, Grid, Typography, List, ListItem, ListItemText, Checkbox } from '@material-ui/core'
+import RecipeButton from './recipe-button'
 
-const styles = theme => ({
+const styles = {
   container: {
     marginTop: 100
-  },
-  button: {
-    color: theme.palette
   }
-})
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-  },
-  typography: {
-    useNextVariants: true,
-  }
-})
+}
 
 function GroceryList ({ classes, groceries, handleCheck }) {
     return (
@@ -44,14 +32,7 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           </List>
         </Grid>
         <Grid item>
-          {groceries.every(grocery => grocery.checked === true) &&
-          <MuiThemeProvider theme={theme}>
-            <Button className={classes.button}
-              color="primary"
-              variant="contained"
-              href="#instructions">Make Recipe</Button>
-          </MuiThemeProvider>
-          }
+          {groceries.every(grocery => grocery.checked === true) && <RecipeButton />}
         </Grid>
       </Grid>
     )

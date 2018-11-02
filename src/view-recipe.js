@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import hash from './hash'
 import Instructions from './instructions'
 import GroceryButton from './grocery-button'
+import RecipeButton from './recipe-button'
 
 export default class ViewRecipe extends Component {
   constructor(props) {
@@ -98,7 +99,6 @@ export default class ViewRecipe extends Component {
 
   render() {
     const { recipeInfo, isFavorited } = this.state
-    const { id } = this.state.view.params
     if (!recipeInfo) return null
     return (
       <Fragment>
@@ -109,7 +109,8 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-        <a href={`#grocery-list?id=${id}`}><GroceryButton /></a>
+        <GroceryButton />
+        <RecipeButton />
       </Fragment>
     )
   }
