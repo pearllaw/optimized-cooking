@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-function IngredientList({ classes, ingredientList, handleClick, deleteIngredient }) {
+function IngredientList({ classes, ingredientList, deleteIngredient }) {
   return (
     <Grid container
       alignItems="center"
@@ -36,7 +36,6 @@ function IngredientList({ classes, ingredientList, handleClick, deleteIngredient
         <Button className={classes.button}
           href="#get-recipes"
           variant="contained"
-          onClick={handleClick}
           >Generate Recipes</Button>
       </Grid>
       }

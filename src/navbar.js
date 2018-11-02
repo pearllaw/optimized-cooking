@@ -20,6 +20,7 @@ function Nav ({ classes }) {
         <Toolbar>
           <Button color="inherit" href="#list">My List</Button>
           <Button color="inherit" href="#recipe-collection">Recipes</Button>
+          <Button color="inherit" href="#grocery-list">Grocery List</Button>
         </Toolbar>
       </AppBar>
     </div>
