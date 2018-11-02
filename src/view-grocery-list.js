@@ -33,8 +33,7 @@ export default class ViewGroceries extends Component {
       return ([lowerResult, lowerIngredients])
     })
     .then(([res1, res2]) => {
-      const mismatch = res1.filter(item => !res2.includes(item))
-        .concat(res2.filter(item => !res1.includes(item)))
+      const mismatch = res2.filter(item => !res1.includes(item))
       return mismatch
     })
     .then(data => {
