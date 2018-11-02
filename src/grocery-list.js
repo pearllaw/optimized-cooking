@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, Grid, Typography, List, ListItem, ListItemText } from '@material-ui/core'
+import { withStyles, Grid, Typography, List, ListItem, ListItemText, Checkbox } from '@material-ui/core'
 
 const styles = {
   container: {
@@ -7,9 +7,9 @@ const styles = {
   }
 }
 
-function GroceryList ({ classes, groceries }) {
-  return (
-    <Grid container
+function GroceryList ({ classes, groceries, checked, handleCheck }) {
+    return (
+      <Grid container
       alignItems="center"
       direction="column"
       spacing={40}
@@ -20,13 +20,17 @@ function GroceryList ({ classes, groceries }) {
           <List>
           {groceries.map((grocery, index) => {
           return <ListItem key={index}>
-              <ListItemText primary={grocery} />
+              <Checkbox
+                checked={checked}
+                onChange={handleCheck}
+              />
+              <ListItemText primary={grocery.item} />
           </ListItem>
           })}
           </List>
         </Grid>
       </Grid>
-  )
+    )
 }
 
 export default withStyles(styles)(GroceryList)
