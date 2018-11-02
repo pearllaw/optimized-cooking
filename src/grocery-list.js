@@ -1,11 +1,24 @@
 import React from 'react'
-import { withStyles, Grid, Typography, List, ListItem, ListItemText, Checkbox } from '@material-ui/core'
+import { withStyles, MuiThemeProvider, createMuiTheme, Grid, Typography, List, ListItem, ListItemText, Checkbox, Button } from '@material-ui/core'
+import blue from '@material-ui/core/colors/blue'
 
-const styles = {
+const styles = theme => ({
   container: {
     marginTop: 100
+  },
+  button: {
+    color: theme.palette
   }
-}
+})
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+  },
+  typography: {
+    useNextVariants: true,
+  }
+})
 
 function GroceryList ({ classes, groceries, handleCheck }) {
     return (
@@ -29,6 +42,13 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           </ListItem>
           })}
           </List>
+        </Grid>
+        <Grid item>
+          <MuiThemeProvider theme={theme}>
+            <Button className={classes.button}
+              color="primary"
+              variant="contained">Make Recipe</Button>
+          </MuiThemeProvider>
         </Grid>
       </Grid>
     )

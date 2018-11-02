@@ -99,6 +99,7 @@ export default class ViewRecipe extends Component {
   render() {
     const { recipeInfo, isFavorited } = this.state
     const { id } = this.state.view.params
+    if (!recipeInfo) return null
     return (
       <Fragment>
         <Instructions handleClick={this.handleClick}
