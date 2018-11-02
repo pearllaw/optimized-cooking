@@ -13,8 +13,13 @@ export default class ViewGroceries extends Component {
     this.handleCheck = this.handleCheck.bind(this)
   }
 
-  handleCheck() {
-    this.setState({ checked: !this.state.checked })
+  handleCheck(index) {
+    const checked = this.state.groceries.map((item, itemIndex) =>
+      itemIndex === index
+        ? Object.assign({}, item, { checked: !item.checked })
+        : item
+    )
+    this.setState({ groceries: checked })
   }
 
   componentDidMount() {

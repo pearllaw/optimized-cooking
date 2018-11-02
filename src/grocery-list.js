@@ -7,7 +7,7 @@ const styles = {
   }
 }
 
-function GroceryList ({ classes, groceries, checked, handleCheck }) {
+function GroceryList ({ classes, groceries, handleCheck }) {
     return (
       <Grid container
       alignItems="center"
@@ -21,8 +21,9 @@ function GroceryList ({ classes, groceries, checked, handleCheck }) {
           {groceries.map((grocery, index) => {
           return <ListItem key={index}>
               <Checkbox
-                checked={checked}
-                onChange={handleCheck}
+                key={index}
+                checked={grocery.checked}
+                onChange={() => handleCheck(index)}
               />
               <ListItemText primary={grocery.item} />
           </ListItem>
