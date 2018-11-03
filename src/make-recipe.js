@@ -7,7 +7,8 @@ export default class MakeRecipe extends Component {
     super(props)
     const { path, params } = hash.parse(location.hash)
     this.state = {
-      recipeInfo: null,
+      steps: null,
+      title: null,
       currentIndex: 0,
       view: {path, params}
     }
@@ -18,17 +19,22 @@ export default class MakeRecipe extends Component {
     fetch(`/ingred?id=${id}`)
       .then(res => res.json())
       .then(data => {
-        const instructions = (({ analyzedInstructions, title }) => ({ analyzedInstructions, title }))(data)
-      return instructions
+        const instructions = (({ analyzedInstructions }) => ({ analyzedInstructions }))(data)
+        const title = (({ title }) => ({ title}))(data)
+        this.setState({ title: title})
+        return instructions
       })
-      .then(result => this.setState({ recipeInfo: result}))
+      .then(instructions => instructions.analyzedInstructions[0].steps)
+      .then(res => this.setState({ steps: res}))
   }
 
   render() {
-    const { recipeInfo } = this.state
-    if (recipeInfo === null) return null
+    const { title, steps, currentIndex } = this.state
+    if (steps === null) return null
     return (
-      <Steps recipeInfo={recipeInfo}/>
+      <Steps title={title}
+      steps={steps}
+      currentIndex={currentIndex}/>
     )
   }
 }
