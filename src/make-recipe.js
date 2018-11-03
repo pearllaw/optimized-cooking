@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Steps from './recipe-steps'
 import hash from './hash'
+import Progress from './progress-bar'
 
 export default class MakeRecipe extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ export default class MakeRecipe extends Component {
       currentIndex={currentIndex}
       handlePrev={this.handlePrev}
       handleNext={this.handleNext}/>
+      <Progress steps={steps} currentIndex={currentIndex}/>
       {currentIndex === steps.length - 1 &&
         <div>Add completed button here</div>
       }
