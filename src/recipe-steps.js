@@ -28,14 +28,21 @@ const styles = {
 
 function Steps({ classes, steps, currentIndex, title }) {
   return (
-    <Grid container
-      alignItems="center"
-      direction="column"
-      spacing={40}>
+    <div>
       <Typography variant="h3"
+        align="center"
         className={classes.container}>Whipping Up</Typography>
       <Typography variant="h4"
+        align="center"
         className={classes.title}>{`${title.title}`}</Typography>
+    <Grid container
+      direction="row"
+      justify="space-evenly"
+      alignItems="center">
+      <Grid item xs
+        style={{textAlign: "center"}}>
+      <i className="material-icons" style={{fontSize: '300%'}}>arrow_back_ios</i>
+      </Grid>
       <Grid item xs={8}>
         <Card className={classes.card}>
           <CardContent>
@@ -47,7 +54,12 @@ function Steps({ classes, steps, currentIndex, title }) {
           </CardContent>
         </Card>
       </Grid>
+      <Grid item xs
+        style={{textAlign: "center"}}>
+        <i className="material-icons" style={{fontSize: '300%'}}>arrow_forward_ios</i>
+      </Grid>
     </Grid>
+    </div>
   )
 }
 
