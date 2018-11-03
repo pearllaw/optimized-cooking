@@ -26,7 +26,7 @@ const styles = {
   }
 }
 
-function Steps({ classes, steps, currentIndex, title }) {
+function Steps({ classes, steps, currentIndex, title, handlePrev, handleNext }) {
   return (
     <div>
       <Typography variant="h3"
@@ -41,7 +41,9 @@ function Steps({ classes, steps, currentIndex, title }) {
       alignItems="center">
       <Grid item xs
         style={{textAlign: "center"}}>
-      <i className="material-icons" style={{fontSize: '300%'}}>arrow_back_ios</i>
+      <i className="material-icons"
+        style={{fontSize: '300%'}}
+        onClick={handlePrev}>arrow_back_ios</i>
       </Grid>
       <Grid item xs={8}>
         <Card className={classes.card}>
@@ -56,7 +58,9 @@ function Steps({ classes, steps, currentIndex, title }) {
       </Grid>
       <Grid item xs
         style={{textAlign: "center"}}>
-        <i className="material-icons" style={{fontSize: '300%'}}>arrow_forward_ios</i>
+        <i className="material-icons"
+          style={{fontSize: '300%'}}
+          onClick={handleNext}>arrow_forward_ios</i>
       </Grid>
     </Grid>
     </div>

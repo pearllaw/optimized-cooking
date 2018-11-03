@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Steps from './recipe-steps'
 import hash from './hash'
 
@@ -11,6 +11,25 @@ export default class MakeRecipe extends Component {
       title: null,
       currentIndex: 0,
       view: {path, params}
+    }
+    this.handleNext = this.handleNext.bind(this)
+    this.handlePrev = this.handlePrev.bind(this)
+  }
+
+  handleNext() {
+    const { currentIndex, steps } = this.state
+    this.setState({ currentIndex: currentIndex < steps.length - 1
+      ? currentIndex + 1
+      : 0 })
+  }
+
+  handlePrev() {
+    const { currentIndex, steps } = this.state
+    if (currentIndex < steps.length) {
+      this.setState({ currentIndex: currentIndex - 1 })
+    }
+    if (currentIndex === 0) {
+      this.setState({ currentIndex: 0})
     }
   }
 
@@ -30,11 +49,18 @@ export default class MakeRecipe extends Component {
 
   render() {
     const { title, steps, currentIndex } = this.state
-    if (steps === null) return null
+    if (!steps) return null
     return (
+      <Fragment>
       <Steps title={title}
       steps={steps}
-      currentIndex={currentIndex}/>
+      currentIndex={currentIndex}
+      handlePrev={this.handlePrev}
+      handleNext={this.handleNext}/>
+      {currentIndex === steps.length - 1 &&
+        <div>Add completed button here</div>
+      }
+      </Fragment>
     )
   }
 }
