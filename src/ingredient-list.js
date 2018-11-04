@@ -35,8 +35,7 @@ function IngredientList({ classes, ingredientList, deleteIngredient }) {
       <Grid item>
         <Button className={classes.button}
           href="#get-recipes"
-          variant="contained"
-          >Generate Recipes</Button>
+          variant="contained">Generate Recipes</Button>
       </Grid>
       }
     </Grid>

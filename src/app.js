@@ -31,7 +31,6 @@ export default class Recipes extends Component {
       const { path, params } = hash.parse(location.hash)
       this.setState({ view: { path, params } })
     }
-
     // this.timer = setInterval(this.progress, 20)
   }
 
