@@ -1,38 +1,8 @@
 {
   "ingredients": [
-    {
-      "ingredient": "Cheese",
-      "id": 1
-    },
-    {
-      "ingredient": "Bacon",
-      "id": 3
-    },
-    {
-      "ingredient": "Ham",
-      "id": 4
-    },
-    {
-      "ingredient": "Flour",
-      "id": 5
-    },
-    {
-      "ingredient": "Eggs",
-      "id": 6
-    }
+
   ],
   "my-recipes": [
-    {
-      "title": "Baked Ham and Cheese Omelet Roll",
-      "recipeId": 141623,
-      "saved": true,
-      "id": 2
-    },
-    {
-      "title": "La mozzarella in carrozza",
-      "recipeId": 556487,
-      "saved": true,
-      "id": 3
-    }
+
   ]
 }
