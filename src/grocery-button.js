@@ -6,7 +6,10 @@ import hash from './hash'
 const styles = theme => ({
   button: {
     color: theme.palette,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    marginRight: 20,
+    marginBottom: 50,
+    float: 'right'
   }
 })
 

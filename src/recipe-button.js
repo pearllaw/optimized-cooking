@@ -5,7 +5,10 @@ import hash from './hash'
 
 const styles = theme => ({
   button: {
-    color: theme.palette
+    color: theme.palette,
+    marginRight: 100,
+    marginBottom: 50,
+    float: 'right'
   }
 })
 

@@ -31,10 +31,9 @@ export default class ViewGroceries extends Component {
       fetch(`/ingred?id=${id}`)
         .then(res => res.json())
         .then(data => {
-          const ingred = (({ extendedIngredients }) => ({ extendedIngredients }))(data)
-          return ingred
+          const ingred = (({ extendedIngredients }) => Object.values({ extendedIngredients }))(data)
+          return ingred[0].map(item => item.name)
         })
-        .then(result => result.extendedIngredients.map(item => item.name))
     ])
     .then(([result, ingredients]) => {
       const lowerResult = result.map(word => word.toLowerCase())

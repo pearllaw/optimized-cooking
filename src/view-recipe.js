@@ -109,8 +109,8 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-        <GroceryButton />
-        <RecipeButton />
+          <RecipeButton />
+          <GroceryButton />
       </Fragment>
     )
   }

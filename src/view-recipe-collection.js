@@ -41,6 +41,7 @@ class RecipeCollection extends Component {
         className={classes.container}
         >
         <Typography variant="h3" align="center">My Recipes</Typography>
+        {savedRecipes.length > 0 &&
         <Grid item>
           <List className={classes.list}>
           {savedRecipes.map(recipe => {
@@ -53,6 +54,7 @@ class RecipeCollection extends Component {
           })}
         </List>
         </Grid>
+        }
       </Grid>
     )
   }
