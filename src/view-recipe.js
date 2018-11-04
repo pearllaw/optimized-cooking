@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import hash from './hash'
 import Instructions from './instructions'
 import GroceryButton from './grocery-button'
+import RecipeButton from './recipe-button'
 
 export default class ViewRecipe extends Component {
   constructor(props) {
@@ -29,8 +30,8 @@ export default class ViewRecipe extends Component {
     fetch(`/ingred?id=${id}`)
         .then(res => res.json())
         .then(data => {
-          const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }) =>
-            ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }))(data)
+          const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id, sourceUrl }) =>
+            ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id, sourceUrl }))(data)
           return selected
         })
         .then(result => this.setState({ recipeInfo: result }))
@@ -98,7 +99,7 @@ export default class ViewRecipe extends Component {
 
   render() {
     const { recipeInfo, isFavorited } = this.state
-    const { id } = this.state.view.params
+    if (!recipeInfo) return null
     return (
       <Fragment>
         <Instructions handleClick={this.handleClick}
@@ -108,7 +109,8 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-        <a href={`#grocery-list?id=${id}`}><GroceryButton /></a>
+        <GroceryButton />
+        <RecipeButton />
       </Fragment>
     )
   }

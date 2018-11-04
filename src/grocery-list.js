@@ -1,5 +1,6 @@
 import React from 'react'
 import { withStyles, Grid, Typography, List, ListItem, ListItemText, Checkbox } from '@material-ui/core'
+import RecipeButton from './recipe-button'
 
 const styles = {
   container: {
@@ -29,6 +30,9 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           </ListItem>
           })}
           </List>
+        </Grid>
+        <Grid item>
+          {groceries.every(grocery => grocery.checked === true) && <RecipeButton />}
         </Grid>
       </Grid>
     )

@@ -5,8 +5,7 @@ import hash from './hash'
 
 const styles = theme => ({
   button: {
-    color: theme.palette,
-    textDecoration: 'none'
+    color: theme.palette
   }
 })
 
@@ -19,7 +18,7 @@ const theme = createMuiTheme({
   }
 })
 
-class GroceryButton extends Component {
+class RecipeButton extends Component {
   constructor(props) {
     super(props)
     const { path, params } = hash.parse(location.hash)
@@ -27,18 +26,19 @@ class GroceryButton extends Component {
       view: { path, params }
     }
   }
+
   render() {
     const { classes } = this.props
     const { id } = this.state.view.params
     return (
       <MuiThemeProvider theme={theme}>
         <Button className={classes.button}
-          variant="contained"
           color="primary"
-          href={`#grocery-list?id=${id}`}>Create Grocery List</Button>
+          variant="contained"
+          href={`#instructions?id=${id}`}>Make Recipe</Button>
       </MuiThemeProvider>
     )
   }
 }
 
-export default withStyles(styles)(GroceryButton)
+export default withStyles(styles)(RecipeButton)

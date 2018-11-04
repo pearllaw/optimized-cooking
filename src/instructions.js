@@ -29,6 +29,7 @@ const styles = {
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
     if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
+    const source = recipeInfo.sourceUrl
     return (
       <Grid container className={classes.container}>
         <Grid item xs={6}>
@@ -71,7 +72,12 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
             <Card className={classes.directions}>
               <CardContent>
                 <Typography variant="h6">Directions</Typography>
-                  {instructions.map((steps, index) => (
+                  {recipeInfo.analyzedInstructions.length === 0
+                    ? <Typography variant="h6" component="p">
+                    Sorry! We are unable to load directions on this page.
+                    Please visit  {<a href={`${source}`} target="_blank">recipe website</a>} for directions.
+                    </Typography>
+                    : instructions.map((steps, index) => (
                      <List key={index}>
                       <ListItem>
                         <ListItemText primary={steps.number + '. ' + steps.step} />
