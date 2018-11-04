@@ -24,6 +24,7 @@ export default class GeneratedRecipes extends Component {
 
   render() {
     const { recipes } = this.state
+    if(!recipes) return null
     return (
       <RecipeList recipes={recipes}/>
     )
