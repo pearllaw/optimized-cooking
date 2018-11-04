@@ -7,6 +7,7 @@ import ViewRecipe from './view-recipe'
 import RecipeCollection from './view-recipe-collection'
 import ViewGroceries from './view-grocery-list'
 import MakeRecipe from './make-recipe'
+import CompletedMessage from './completed-message'
 import { CircularProgress } from '@material-ui/core'
 
 export default class Recipes extends Component {
@@ -51,9 +52,11 @@ export default class Recipes extends Component {
       case 'recipe-collection':
         return <RecipeCollection />
       case 'grocery-list':
-        return <ViewGroceries id={id} />
+        return <ViewGroceries />
       case 'instructions':
         return <MakeRecipe />
+      case 'recipe-complete':
+        return <CompletedMessage id={id}/>
       default:
         return <Ingredients />
     }

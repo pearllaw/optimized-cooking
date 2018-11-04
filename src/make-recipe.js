@@ -20,33 +20,46 @@ class MakeRecipe extends Component {
       title: null,
       sourceUrl: null,
       currentIndex: 0,
+      activeStep: 0,
       view: {path, params}
     }
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
-    // this.handleCompleted = this.handleCompleted.bind(this)
+    this.handleCompleted = this.handleCompleted.bind(this)
   }
 
   handleNext() {
-    const { currentIndex, steps } = this.state
-    this.setState({ currentIndex: currentIndex < steps.length - 1
+    const { currentIndex, activeStep, steps } = this.state
+    this.setState({
+      currentIndex: currentIndex < steps.length - 1
       ? currentIndex + 1
-      : 0 })
+      : 0,
+      activeStep: activeStep < steps.length - 1
+      ? activeStep + 1
+      : 0
+    })
   }
 
   handlePrev() {
-    const { currentIndex, steps } = this.state
+    const { currentIndex, activeStep, steps } = this.state
     if (currentIndex < steps.length) {
-      this.setState({ currentIndex: currentIndex - 1 })
+      this.setState({
+        currentIndex: currentIndex - 1,
+        activeStep: activeStep - 1
+      })
     }
     if (currentIndex === 0) {
-      this.setState({ currentIndex: 0})
+      this.setState({
+        currentIndex: 0,
+        activeStep: 0
+      })
     }
   }
 
-  // handleCompleted() {
-  //   this.setState({ currentIndex: currentIndex})
-  // }
+  handleCompleted() {
+    const { activeStep } = this.state
+    this.setState({ activeStep: activeStep + 1 })
+  }
 
   componentDidMount() {
     const { id } = this.state.view.params
@@ -64,9 +77,9 @@ class MakeRecipe extends Component {
   }
 
   render() {
-    const { title, steps, currentIndex, sourceUrl } = this.state
+    const { title, steps, currentIndex, sourceUrl, activeStep } = this.state
+    const { id } = this.state.view.params
     const { classes } = this.props
-    console.log(this.state)
     if (!title) return null
     return steps === null
     ? <Grid container
@@ -85,12 +98,10 @@ class MakeRecipe extends Component {
           currentIndex={currentIndex}
           handlePrev={this.handlePrev}
           handleNext={this.handleNext} />
-        <Progress steps={steps}
-          currentIndex={currentIndex} />
-      {/* {currentIndex === steps.length - 1 &&
-        <Button variant="contained"
-          onClick={this.handleCompleted}>Completed</Button>
-      } */}
+        <Progress id={id}
+          steps={steps}
+          activeStep={activeStep}
+          handleCompleted={this.handleCompleted}/>
       </Fragment>
   }
 }
