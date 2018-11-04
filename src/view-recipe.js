@@ -30,8 +30,8 @@ export default class ViewRecipe extends Component {
     fetch(`/ingred?id=${id}`)
         .then(res => res.json())
         .then(data => {
-          const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }) =>
-            ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id }))(data)
+          const selected = (({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id, sourceUrl }) =>
+            ({ analyzedInstructions, extendedIngredients, preparationMinutes, servings, title, image, id, sourceUrl }))(data)
           return selected
         })
         .then(result => this.setState({ recipeInfo: result }))

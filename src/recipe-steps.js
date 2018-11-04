@@ -28,7 +28,7 @@ const styles = {
 
 function Steps({ classes, steps, currentIndex, title, handlePrev, handleNext }) {
   return (
-    <div>
+  <div>
       <Typography variant="h3"
         align="center"
         className={classes.container}>Whipping Up</Typography>
