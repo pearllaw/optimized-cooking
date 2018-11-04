@@ -54,8 +54,10 @@ export default class Ingredients extends Component {
     return (
       <Fragment>
         <IngredientForm handleSubmit={this.handleSubmit} />
+        {ingredientList.length > 0 &&
         <IngredientList ingredientList={ingredientList}
           deleteIngredient={this.deleteIngredient} />
+        }
       </Fragment>
     )
   }
