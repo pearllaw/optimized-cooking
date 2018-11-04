@@ -54,8 +54,8 @@ class GeneratedRecipes extends Component {
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
-          {recipes.map(tile => (
-            <GridListTile key={tile.image}>
+          {recipes.map(tile => {
+            return <GridListTile key={tile.image}>
               <a href={`#view-recipe?id=${tile.id}`}><img src={tile.image}
                 alt={tile.title}
                 id={tile.id}
@@ -66,7 +66,7 @@ class GeneratedRecipes extends Component {
                 titlePosition="top"
               />
             </GridListTile>
-          ))}
+          })}
         </GridList>
       </div>
       </div>
