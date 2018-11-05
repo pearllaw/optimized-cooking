@@ -9,7 +9,6 @@ const styles = {
 }
 
 function GroceryList ({ classes, groceries, handleCheck }) {
-  const groceryList = groceries || []
   return (
       <Grid container
       alignItems="center"
@@ -20,7 +19,7 @@ function GroceryList ({ classes, groceries, handleCheck }) {
       <Typography variant="h3" align="center">Grocery List</Typography>
         <Grid item>
           <List>
-          {groceryList.map((grocery, index) => {
+          {groceries.map((grocery, index) => {
           return <ListItem key={index}>
               <Checkbox
                 key={index}

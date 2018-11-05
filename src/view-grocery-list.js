@@ -54,7 +54,7 @@ export default class ViewGroceries extends Component {
 
   render() {
     const { groceries } = this.state
-    if (!groceries) return null
+    if (groceries.length === 0) return null
     return (
       <GroceryList groceries={groceries}
         handleCheck={this.handleCheck} />

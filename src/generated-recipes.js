@@ -5,11 +5,11 @@ export default class GeneratedRecipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: null || []
+      recipes: []
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('/ingredients')
       .then(res => res.json())
       .then(list => list.map(item => item.ingredient))
@@ -24,7 +24,7 @@ export default class GeneratedRecipes extends Component {
 
   render() {
     const { recipes } = this.state
-    if(!recipes) return null
+    if(recipes.length === 0) return null
     return (
       <RecipeList recipes={recipes}/>
     )
