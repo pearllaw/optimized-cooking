@@ -9,7 +9,8 @@ const styles = {
 }
 
 function GroceryList ({ classes, groceries, handleCheck }) {
-    return (
+  const groceryList = groceries || []
+  return (
       <Grid container
       alignItems="center"
       direction="column"
@@ -19,7 +20,7 @@ function GroceryList ({ classes, groceries, handleCheck }) {
       <Typography variant="h3" align="center">Grocery List</Typography>
         <Grid item>
           <List>
-          {groceries.map((grocery, index) => {
+          {groceryList.map((grocery, index) => {
           return <ListItem key={index}>
               <Checkbox
                 key={index}
@@ -32,7 +33,7 @@ function GroceryList ({ classes, groceries, handleCheck }) {
           </List>
         </Grid>
         <Grid item>
-          {groceries.every(grocery => grocery.checked === true) && <RecipeButton />}
+          {groceries.every(grocery => grocery.checked) === true && <RecipeButton />}
         </Grid>
       </Grid>
     )
