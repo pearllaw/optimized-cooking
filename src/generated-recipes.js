@@ -9,7 +9,7 @@ export default class GeneratedRecipes extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch('/ingredients')
       .then(res => res.json())
       .then(list => list.map(item => item.ingredient))
