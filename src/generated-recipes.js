@@ -5,7 +5,7 @@ export default class GeneratedRecipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: null
+      recipes: null || []
     }
   }
 

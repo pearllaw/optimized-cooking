@@ -25,13 +25,12 @@ const styles = {
 }
 
 function RecipeList({ classes, recipes }) {
-  const renderRecipes = recipes || []
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>
       <div className={classes.container}>
         <GridList cols={3} cellHeight={'auto'} className={classes.gridList}>
-          {renderRecipes.map(tile => (
+          {recipes.map(tile => (
             <GridListTile key={tile.image}>
               <a href={`#view-recipe?id=${tile.id}`}><img src={tile.image}
                 alt={tile.title}
