@@ -7,7 +7,7 @@ A JavaScript web app for budget conscious individuals who want to use their groc
 ![ingredient-list](https://user-images.githubusercontent.com/35009493/48029886-421b3c00-e104-11e8-8ab6-1570a5b15067.gif)
 
 ### Generate a list of recipes based on the list of ingredients you provided and save a recipe to your recipe box for later.
-![save-recipe](https://user-images.githubusercontent.com/35009493/48030260-57449a80-e105-11e8-88b6-20eb41d8eaa0.gif)
+![save-recipe](https://user-images.githubusercontent.com/35009493/48030369-ab4f7f00-e105-11e8-9ff9-2bc73c236170.gif)
 
 ### Generate a grocery list containing items you still need to buy to make a chosen recipe.
 ![grocery-list](https://user-images.githubusercontent.com/35009493/48030261-57449a80-e105-11e8-8490-028027ec63b4.gif)
