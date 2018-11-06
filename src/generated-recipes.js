@@ -14,7 +14,8 @@ export default class GeneratedRecipes extends Component {
       .then(res => res.json())
       .then(list => list.map(item => item.ingredient))
       .then(result => {
-        fetch(`/recipes?ingredients=${result}`)
+        const ingred = result.toString()
+        return fetch(`/recipes?ingredients=${ingred}`)
           .then(res => res.json())
           .then(recipes => {
             this.setState({ recipes: recipes })
