@@ -9,7 +9,7 @@ export default class ViewRecipe extends Component {
     super(props)
     const { path, params } = hash.parse(location.hash)
     this.state = {
-      recipeInfo: null,
+      recipeInfo: [],
       isFavorited: false,
       savedRecipes: [],
       view: { path, params }
@@ -99,7 +99,7 @@ export default class ViewRecipe extends Component {
 
   render() {
     const { recipeInfo, isFavorited } = this.state
-    if (!recipeInfo) return null
+    if (recipeInfo.length === 0) return null
     return (
       <Fragment>
         <Instructions handleClick={this.handleClick}

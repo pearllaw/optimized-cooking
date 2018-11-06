@@ -27,8 +27,8 @@ const styles = {
 }
 
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
-    const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
-    const source = recipeInfo.sourceUrl
+  const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
+  const source = recipeInfo.sourceUrl
     return (
       <Grid container className={classes.container}>
         <Grid item xs={6}>
@@ -76,13 +76,13 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
                     Sorry! We are unable to load directions on this page.
                     Please visit  {<a href={`${source}`} target="_blank">recipe website</a>} for directions.
                     </Typography>
-                    : instructions.map((steps, index) => (
-                     <List key={index}>
+                    : instructions.map((steps, index) => {
+                     return <List key={index}>
                       <ListItem>
                         <ListItemText primary={steps.number + '. ' + steps.step} />
                       </ListItem>
                     </List>
-                    ))}
+                    })}
               </CardContent>
             </Card>
           </Grid>

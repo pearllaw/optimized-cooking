@@ -21,7 +21,7 @@ app.get('/ingred', (req, res, next) => {
   const query = req.query.id + '/information'
   unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query)
     .header(
-      {'X-Mashape-Key': process.env.KEY},
+      {'X-Mashape-Key': 'HMGCCCcGW9mshhPZsZQ880WxAc1Mp1snUAMjsn69fDjNL2VZSa'},
       {'Accept': 'application/json'}
     )
     .end(result => res.json(result.body))
