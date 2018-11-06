@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react'
-import hash from './hash'
-import Instructions from './instructions'
-import GroceryButton from './grocery-button'
-import RecipeButton from './recipe-button'
+import hash from '../hash'
+import Instructions from '../components/instructions'
+import GroceryButton from '../components/grocery-button'
+import RecipeButton from '../components/recipe-button'
 
 export default class ViewRecipe extends Component {
   constructor(props) {

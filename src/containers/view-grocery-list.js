@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from 'react'
-import GroceryList from './grocery-list'
-import hash from './hash'
+import React, {Component} from 'react'
+import GroceryList from '../components/grocery-list'
+import hash from '../hash'
 
 export default class ViewGroceries extends Component {
   constructor(props) {

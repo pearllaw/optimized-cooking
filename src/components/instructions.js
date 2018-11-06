@@ -1,6 +1,5 @@
 import React from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles } from '@material-ui/core'
 
 const styles = {
   container: {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import RecipeList from './recipe-list'
+import RecipeList from '../components/recipe-list'
 
 export default class GeneratedRecipes extends Component {
   constructor(props) {

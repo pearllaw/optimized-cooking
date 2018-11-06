@@ -1,16 +1,27 @@
 import React from 'react'
-import {Grid, List, ListItem, ListItemText, Button, withStyles} from '@material-ui/core'
+import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core'
+import green from '@material-ui/core/colors/green'
 
-const styles = {
+const styles = theme => ({
+  button: {
+    color: theme.palette
+  },
   list: {
     width: 560,
     border: '1px solid silver',
     borderRadius: '0.25rem'
-  },
-  button: {
-    background: 'rgb(80,173,85)'
   }
-}
+})
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
+  }
+})
+
 
 function IngredientList({ classes, ingredientList, deleteIngredient }) {
   return (
@@ -33,9 +44,12 @@ function IngredientList({ classes, ingredientList, deleteIngredient }) {
       </Grid>
       {ingredientList.length > 0 &&
       <Grid item>
+      <MuiThemeProvider theme={theme}>
         <Button className={classes.button}
           href="#get-recipes"
-          variant="contained">Generate Recipes</Button>
+          variant="contained"
+          color="primary">Generate Recipes</Button>
+      </MuiThemeProvider>
       </Grid>
       }
     </Grid>

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import Steps from './recipe-steps'
-import hash from './hash'
-import Progress from './progress-bar'
+import Steps from '../components/recipe-steps'
+import hash from '../hash'
+import Progress from '../components/progress-bar'
 import { Grid, Typography, withStyles } from '@material-ui/core'
 
 const styles = {

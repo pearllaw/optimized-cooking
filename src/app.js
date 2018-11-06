@@ -1,42 +1,29 @@
 import React, {Component, Fragment} from 'react'
-import Nav from './navbar'
+import Nav from './components/navbar'
 import hash from './hash'
-import Ingredients from './ingredients'
-import GeneratedRecipes from './generated-recipes'
-import ViewRecipe from './view-recipe'
-import RecipeCollection from './view-recipe-collection'
-import ViewGroceries from './view-grocery-list'
-import MakeRecipe from './make-recipe'
-import CompletedMessage from './completed-message'
-// import { CircularProgress } from '@material-ui/core'
+import Ingredients from './containers/ingredients'
+import GeneratedRecipes from './containers/generated-recipes'
+import ViewRecipe from './containers/view-recipe'
+import RecipeCollection from './containers/view-recipe-collection'
+import ViewGroceries from './containers/view-grocery-list'
+import MakeRecipe from './containers/make-recipe'
+import CompletedMessage from './components/completed-message'
 
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
     const { path, params } = hash.parse(location.hash)
     this.state = {
-      loaded: 0,
       view: { path, params }
     }
-    // this.progress = this.progress.bind(this)
   }
-
-  // progress() {
-  //   const { loaded } = this.state
-  //   this.setState({ loaded: loaded >= 100 ? 0 : loaded + 1 })
-  // }
 
   componentDidMount() {
     window.onhashchange = () => {
       const { path, params } = hash.parse(location.hash)
       this.setState({ view: { path, params } })
     }
-    // this.timer = setInterval(this.progress, 20)
   }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.timer)
-  // }
 
   renderView() {
     const { path, params } = this.state.view
@@ -62,14 +49,10 @@ export default class Recipes extends Component {
   }
 
   render () {
-    // const { loaded } = this.state
     return (
       <Fragment>
         <Nav/>
         {this.renderView()}
-        {/* <CircularProgress size={50}
-          variant="determinate"
-          value={loaded} /> */}
       </Fragment>
     )
   }

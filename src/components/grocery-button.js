@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles, MuiThemeProvider, createMuiTheme, Button } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
-import hash from './hash'
+import hash from '../hash'
 
 const styles = theme => ({
   button: {

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import IngredientForm from './ingredient-form'
-import IngredientList from './ingredient-list'
+import IngredientForm from '../components/ingredient-form'
+import IngredientList from '../components/ingredient-list'
 
 export default class Ingredients extends Component {
   constructor(props) {

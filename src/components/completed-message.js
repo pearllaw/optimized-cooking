@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Typography, withStyles, MuiThemeProvider, createMuiTheme, Grid, Button } from '@material-ui/core'
-import hash from './hash'
+import hash from '../hash'
 import blue from '@material-ui/core/colors/blue'
 
 const styles = theme => ({
@@ -53,7 +53,7 @@ class CompletedMessage extends Component {
   render() {
   const { classes } = this.props
   const { message } = this.state
-  if (!message) return null
+  if (message.length === 0) return null
     return (
       <Grid container
         alignItems="center"
