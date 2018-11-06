@@ -1,6 +1,6 @@
 import React from 'react'
 import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core'
-import green from '@material-ui/core/colors/green'
+import blue from '@material-ui/core/colors/blue'
 
 const styles = theme => ({
   button: {
@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: blue,
   },
   typography: {
     useNextVariants: true,
