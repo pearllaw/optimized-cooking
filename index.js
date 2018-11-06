@@ -11,7 +11,7 @@ app.get('/recipes', (req, res, next) => {
   const query = 'fillIngredients=false&ingredients=' + req.query.ingredients + '&limitLicense=false&number=12&ranking=2'
   unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?' + query)
    .header(
-     {'X-Mashape-Key': process.env.KEY},
+     {'X-Mashape-Key': HMGCCCcGW9mshhPZsZQ880WxAc1Mp1snUAMjsn69fDjNL2VZSa},
      {'Accept': 'application/json'}
    )
    .end(result => res.json(result.body))
