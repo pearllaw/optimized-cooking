@@ -27,7 +27,6 @@ const styles = {
 }
 
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
-    if (!recipeInfo) return null
     const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
     const source = recipeInfo.sourceUrl
     return (
