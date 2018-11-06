@@ -1,7 +1,7 @@
 # Optimized Cooking
 A JavaScript web app for budget conscious individuals who want to use their groceries efficiently
 
-#### [Live Demo](...)
+#### [Live Demo](https://optimized-cooking.herokuapp.com/)
 
 ### Make a list of ingredients in your fridge at home.
 ![ingredient-list](https://user-images.githubusercontent.com/35009493/48029886-421b3c00-e104-11e8-8ab6-1570a5b15067.gif)
