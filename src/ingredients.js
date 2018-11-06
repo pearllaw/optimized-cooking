@@ -11,10 +11,6 @@ export default class Ingredients extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addIngredient = this.addIngredient.bind(this)
     this.deleteIngredient = this.deleteIngredient.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-  }
-  handleClick() {
-    this.props.fetchRecipes()
   }
 
   handleSubmit(e) {
@@ -60,8 +56,7 @@ export default class Ingredients extends Component {
         <IngredientForm handleSubmit={this.handleSubmit} />
         {ingredientList.length > 0 &&
         <IngredientList ingredientList={ingredientList}
-          deleteIngredient={this.deleteIngredient}
-          handleClick={this.handleClick} />
+          deleteIngredient={this.deleteIngredient} />
         }
       </Fragment>
     )

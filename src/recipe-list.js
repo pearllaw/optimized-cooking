@@ -25,6 +25,7 @@ const styles = {
 }
 
 function RecipeList({ classes, recipes }) {
+    if(!recipes) return <div>Loading...</div>
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.title}>What Looks Good?</Typography>

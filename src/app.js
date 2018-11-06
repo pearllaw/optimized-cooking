@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import Nav from './navbar'
 import hash from './hash'
 import Ingredients from './ingredients'
-import RecipeList from './recipe-list'
+import GeneratedRecipes from './generated-recipes'
 import ViewRecipe from './view-recipe'
 import RecipeCollection from './view-recipe-collection'
 import ViewGroceries from './view-grocery-list'
@@ -15,11 +15,9 @@ export default class Recipes extends Component {
     super(props)
     const { path, params } = hash.parse(location.hash)
     this.state = {
-      recipes: [],
       loaded: 0,
       view: { path, params }
     }
-    this.fetchRecipes = this.fetchRecipes.bind(this)
     // this.progress = this.progress.bind(this)
   }
 
@@ -27,18 +25,6 @@ export default class Recipes extends Component {
   //   const { loaded } = this.state
   //   this.setState({ loaded: loaded >= 100 ? 0 : loaded + 1 })
   // }
-  fetchRecipes() {
-    fetch('/ingredients')
-      .then(res => res.json())
-      .then(list => list.map(item => item.ingredient))
-      .then(result => {
-        fetch(`/recipes?ingredients=${result}`)
-          .then(res => res.json())
-          .then(recipes => {
-            this.setState({ recipes: recipes })
-          })
-      })
-  }
 
   componentDidMount() {
     window.onhashchange = () => {
@@ -55,12 +41,11 @@ export default class Recipes extends Component {
   renderView() {
     const { path, params } = this.state.view
     const { id } = params
-    const { recipes } = this.state
     switch (path) {
       case 'list':
-        return <Ingredients fetchRecipes={this.fetchRecipes}/>
+        return <Ingredients />
       case 'get-recipes':
-        return <RecipeList recipes={recipes}/>
+        return <GeneratedRecipes />
       case 'view-recipe':
         return <ViewRecipe id={id} />
       case 'recipe-collection':
