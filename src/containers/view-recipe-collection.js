@@ -1,27 +1,24 @@
 import React, {Component} from 'react'
-import { withStyles, Grid, Typography, List, ListItem, ListItemText } from '@material-ui/core'
+import MyRecipes from '../components/my-recipes'
+import { Typography } from '@material-ui/core';
 
-const styles = {
-  container: {
-    marginTop: 100
-  },
-  list: {
-    width: 560,
-    marginTop: 40,
-    backgroundColor: 'azure',
-    borderRadius: '0.25rem'
-  },
-  link: {
-    textDecoration: 'none'
-  }
-}
-
-class RecipeCollection extends Component {
+export default class RecipeCollection extends Component {
   constructor(props) {
     super(props)
     this.state = {
       savedRecipes: []
     }
+    this.deleteRecipe = this.deleteRecipe.bind(this)
+  }
+
+  deleteRecipe(e) {
+    const { savedRecipes } = this.state
+    const updateRecipes = savedRecipes.filter(item => item.id !== parseInt(e.target.id, 10))
+    fetch(`/my-recipes/${e.target.id}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    this.setState({ savedRecipes: updateRecipes })
   }
 
   componentDidMount() {
@@ -31,33 +28,10 @@ class RecipeCollection extends Component {
   }
 
   render() {
-    const { classes } = this.props
     const { savedRecipes } = this.state
     return (
-      <Grid container
-        alignItems="center"
-        direction="column"
-        spacing={40}
-        className={classes.container}
-        >
-        <Typography variant="h3" align="center">My Recipes</Typography>
-        {savedRecipes.length > 0 &&
-        <Grid item>
-          <List className={classes.list}>
-          {savedRecipes.map(recipe => {
-          return <ListItem key={recipe.recipeId} divider>
-            <a href={`#view-recipe?id=${recipe.recipeId}`}
-              className={classes.link}>
-              <ListItemText primary={recipe.title} />
-            </a>
-          </ListItem>
-          })}
-        </List>
-        </Grid>
-        }
-      </Grid>
+      <MyRecipes savedRecipes={savedRecipes}
+        deleteRecipe={this.deleteRecipe}/>
     )
   }
 }
-
-export default withStyles(styles)(RecipeCollection)

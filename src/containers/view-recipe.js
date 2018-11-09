@@ -42,6 +42,7 @@ export default class ViewRecipe extends Component {
     const recipe = {
       title: recipeInfo.title,
       recipeId: recipeInfo.id,
+      image: recipeInfo.image,
       saved: true
     }
     fetch('/my-recipes', {
