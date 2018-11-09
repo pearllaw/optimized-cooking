@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { withStyles, Grid, Typography, List, ListItem, ListItemText } from '@material-ui/core'
+import { withStyles, Grid, Typography, List, ListItemText, ButtonBase, Card, CardMedia, CardContent, CardHeader } from '@material-ui/core'
 
 const styles = {
   container: {
@@ -7,12 +7,32 @@ const styles = {
   },
   list: {
     width: 560,
-    marginTop: 40,
-    backgroundColor: 'azure',
+    marginTop: 30,
     borderRadius: '0.25rem'
   },
-  link: {
-    textDecoration: 'none'
+  card: {
+    display: 'flex',
+    margin: 15,
+    height: 100
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  details: {
+    display: 'flex',
+    alignItems: 'center',
+    width: 360
+  },
+  image: {
+    width: 150,
+  },
+  icon: {
+    fontSize: '120%',
+    fontWeight: 600,
+    opacity: 0.8,
+    padding: '10px',
+    position: 'absolute',
+    color: 'white'
   }
 }
 
@@ -45,12 +65,20 @@ class RecipeCollection extends Component {
         <Grid item>
           <List className={classes.list}>
           {savedRecipes.map(recipe => {
-          return <ListItem key={recipe.recipeId} divider>
-            <a href={`#view-recipe?id=${recipe.recipeId}`}
-              className={classes.link}>
-              <ListItemText primary={recipe.title} />
-            </a>
-          </ListItem>
+          return <Card className={classes.card} key={recipe.recipeId}>
+              <i className={`material-icons ${classes.icon}`}
+                id={recipe.id}>clear</i>
+              <CardMedia className={classes.image}
+                image={recipe.image}
+                title="My Saved Recipe" />
+                <div className={classes.details}>
+                  <CardContent className={classes.content}>
+                    <ButtonBase href={`#view-recipe?id=${recipe.recipeId}`}>
+                      <ListItemText primary={recipe.title} />
+                    </ButtonBase>
+                  </CardContent>
+                </div>
+            </Card>
           })}
         </List>
         </Grid>
