@@ -77,7 +77,8 @@ class RecipeCollection extends Component {
           {savedRecipes.map(recipe => {
           return <Card className={classes.card} key={recipe.recipeId}>
               <i className={`material-icons ${classes.icon}`}
-                id={recipe.id}>clear</i>
+                id={recipe.id}
+                onClick={this.deleteRecipe}>clear</i>
               <CardMedia className={classes.image}
                 image={recipe.image}
                 title="My Saved Recipe" />
