@@ -7,7 +7,6 @@ const styles = {
   },
   list: {
     width: 560,
-    marginTop: 30,
     borderRadius: '0.25rem'
   },
   card: {
@@ -42,6 +41,17 @@ class RecipeCollection extends Component {
     this.state = {
       savedRecipes: []
     }
+    this.deleteRecipe = this.deleteRecipe.bind(this)
+  }
+
+  deleteRecipe(e) {
+    const { savedRecipes } = this.state
+    const updateRecipes = savedRecipes.filter(item => item.id !== parseInt(e.target.id, 10))
+    fetch(`/my-recipes/${e.target.id}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    this.setState({ savedRecipes: updateRecipes })
   }
 
   componentDidMount() {
