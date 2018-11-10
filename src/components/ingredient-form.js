@@ -1,18 +1,17 @@
 import React from 'react'
-import { Typography, TextField, Button, withStyles } from '@material-ui/core'
+import { Grid, Typography, TextField, Button, withStyles } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
 const styles = {
   container: {
-    marginTop: 100,
-    textAlign: 'center'
+    marginTop: 100
   },
   input: {
     display: 'inline-block',
-    margin: 2 + 'rem'
+    margin: '2rem'
   },
   textField: {
-    width: 500
+    maxWidth: 500
   },
   button: {
     marginTop: 21,
@@ -22,7 +21,9 @@ const styles = {
 
 function IngredientForm({ classes, handleSubmit }) {
   return (
-    <div className={classes.container}>
+    <Grid container
+      justify="center"
+      className={classes.container}>
         <Typography variant="h3" align="center">What's in Your Fridge?</Typography>
         <form className={classes.input} onSubmit={handleSubmit}>
           <TextField
@@ -42,7 +43,7 @@ function IngredientForm({ classes, handleSubmit }) {
             <AddIcon/>
           </Button>
         </form>
-      </div>
+    </Grid>
   )
 }
 

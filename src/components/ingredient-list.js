@@ -7,7 +7,8 @@ const styles = theme => ({
     color: theme.palette
   },
   list: {
-    width: 560,
+    maxWidth: 500,
+    minWidth: 255,
     border: '1px solid silver',
     borderRadius: '0.25rem'
   }
@@ -28,8 +29,7 @@ function IngredientList({ classes, ingredientList, deleteIngredient }) {
     <Grid container
       alignItems="center"
       direction="column"
-      spacing={40}
-      >
+      spacing={40}>
       <Grid item>
           <List className={classes.list}>
           {ingredientList.map(item => {
