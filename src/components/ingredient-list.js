@@ -6,12 +6,9 @@ const styles = theme => ({
   button: {
     color: theme.palette
   },
-  list: {
-    maxWidth: 500,
-    minWidth: 255,
-    border: '1px solid silver',
-    borderRadius: '0.25rem'
-  }
+  list: window.screen.availWidth < 760
+  ? { width: 260, border: '1px solid silver', borderRadius: '0.25rem' }
+  : { width: 560, border: '1px solid silver', borderRadius: '0.25rem' }
 })
 
 const theme = createMuiTheme({
