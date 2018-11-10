@@ -42,13 +42,12 @@ const styles = {
 function MyRecipes({ classes, savedRecipes, deleteRecipe }) {
   return (
     <Grid container
-        alignItems="center"
-        direction="column"
-        spacing={40}
-        className={classes.container}
-        >
-        <Typography variant="h3" align="center">My Recipes</Typography>
-        {savedRecipes.length > 0
+      alignItems="center"
+      direction="column"
+      spacing={40}
+      className={classes.container}>
+      <Typography variant="h3" align="center">My Recipes</Typography>
+      {savedRecipes.length > 0
         ? <Grid item>
           <List className={classes.list}>
           {savedRecipes.map(recipe => {
