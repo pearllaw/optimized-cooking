@@ -27,6 +27,16 @@ app.get('/ingred', (req, res, next) => {
     .end(result => res.json(result.body))
 })
 
+app.get('/nutrition', (req, res, next) => {
+  const query = req.query.id + '/nutritionWidget'
+  unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/menuItems/' + query)
+    .header(
+      {'X-Mashape-Key': 'HMGCCCcGW9mshhPZsZQ880WxAc1Mp1snUAMjsn69fDjNL2VZSa'},
+      {'Accept': 'text/html'}
+    )
+    .end(result => res.json(result.body))
+})
+
 app.use(router)
 
 app.listen(process.env.PORT, () => {
