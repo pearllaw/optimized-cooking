@@ -4,8 +4,8 @@ import AddIcon from '@material-ui/icons/Add'
 
 const styles = {
   container: {
-    marginTop: 100,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 100
   },
   input: {
     display: 'inline-block',
@@ -23,7 +23,7 @@ const styles = {
 function IngredientForm({ classes, handleSubmit }) {
   return (
     <div className={classes.container}>
-        <Typography variant="h3" align="center">What's in Your Fridge?</Typography>
+        <Typography variant="h3" align="center" className={classes.title}>What's in Your Fridge?</Typography>
         <form className={classes.input} onSubmit={handleSubmit}>
           <TextField
             className={classes.textField}

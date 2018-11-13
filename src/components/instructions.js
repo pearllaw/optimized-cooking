@@ -8,6 +8,10 @@ const styles = {
   card: {
     boxShadow: 'none'
   },
+  subtitle: {
+    paddingRight: '24px',
+    paddingLeft: '24px'
+  },
   image: {
     padding: 20,
     maxHeight: 350,
@@ -34,7 +38,6 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
           <Card className={classes.card}>
             <CardHeader
               title={recipeInfo.title}
-              subheader={`Servings: ${recipeInfo.servings} ` + `Prep Time: ${recipeInfo.preparationMinutes} minutes`}
               action={
                 <IconButton onClick={handleClick}>
                   {isFavorited === false
@@ -44,6 +47,8 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
                 </IconButton>
               }
             />
+            <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
+            <Typography className={classes.subtitle} color="textSecondary">{`Prep Time: ${recipeInfo.preparationMinutes} minutes`}</Typography>
             <CardMedia
               className={classes.image}
               component="img"

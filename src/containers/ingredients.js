@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import IngredientForm from '../components/ingredient-form'
 import IngredientList from '../components/ingredient-list'
 
@@ -52,13 +52,13 @@ export default class Ingredients extends Component {
   render() {
     const { ingredientList } = this.state
     return (
-      <Fragment>
+      <div>
         <IngredientForm handleSubmit={this.handleSubmit} />
         {ingredientList.length > 0 &&
         <IngredientList ingredientList={ingredientList}
           deleteIngredient={this.deleteIngredient} />
         }
-      </Fragment>
+      </div>
     )
   }
 }

@@ -29,9 +29,8 @@ const styles = {
     fontSize: '120%',
     fontWeight: 600,
     opacity: 0.8,
-    padding: '10px',
-    position: 'absolute',
-    color: 'white'
+    padding: '5px',
+    position: 'absolute'
   },
   message: {
     marginTop: 150,
