@@ -1,6 +1,7 @@
 import React from 'react'
-import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core'
+import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme, Typography} from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
+import CalorieForm from './calorie-form'
 
 const styles = theme => ({
   button: {
@@ -38,6 +39,9 @@ function IngredientList({ classes, ingredientList, deleteIngredient }) {
             </ListItem>
           })}
           </List>
+      </Grid>
+      <Grid item>
+        <CalorieForm/>
       </Grid>
       {ingredientList.length > 0 &&
       <Grid item>
