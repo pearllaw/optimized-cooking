@@ -32,6 +32,7 @@ const styles = {
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
   const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
   const source = recipeInfo.sourceUrl
+  const bull = <span className={classes.bullet}>•</span>
     return (
       <Grid container className={classes.container}>
         <Grid item xs={6}>
@@ -63,8 +64,8 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
                 <Typography variant="h6">Ingredients</Typography>
                   {recipeInfo.extendedIngredients.map(ingred => (
                   <List key={ingred.id}>
-                    <ListItem>
-                      <ListItemText primary={ingred.original} />
+                    <ListItem disableGutters={true}>
+                    {bull} <ListItemText primary={ingred.original} />
                     </ListItem>
                   </List>
                   ))}
