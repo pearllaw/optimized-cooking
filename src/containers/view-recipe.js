@@ -12,7 +12,6 @@ export default class ViewRecipe extends Component {
       recipeInfo: [],
       isFavorited: false,
       savedRecipes: [],
-      nutrition: null,
       view: { path, params }
     }
     this.handleClick = this.handleClick.bind(this)
@@ -77,6 +76,7 @@ export default class ViewRecipe extends Component {
 
   componentDidMount() {
     const { id } = this.state.view.params
+    const { recipeInfo } = this.state
     fetch('/my-recipes')
       .then(res => res.json())
       .then(data => data.map(item => item.recipeId))
@@ -95,10 +95,6 @@ export default class ViewRecipe extends Component {
             }))
           : this.getRecipeInfo()
       })
-
-    fetch(`/nutrition?id=${id}`)
-      .then(res => console.log(res.json()))
-      .then(result => this.setState({ nutrition: result }))
 
     this.updateSavedRecipes()
   }

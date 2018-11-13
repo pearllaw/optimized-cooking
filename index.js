@@ -27,12 +27,12 @@ app.get('/ingred', (req, res, next) => {
     .end(result => res.json(result.body))
 })
 
-app.get('/nutrition', (req, res, next) => {
-  const query = req.query.id + '/nutritionWidget'
-  unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/menuItems/' + query)
+app.get('/nutritional', (req, res, next) => {
+  const query = 'targetCalories=' + req.query.number + '&timeFrame=day'
+  unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?' + query)
     .header(
       {'X-Mashape-Key': 'HMGCCCcGW9mshhPZsZQ880WxAc1Mp1snUAMjsn69fDjNL2VZSa'},
-      {'Accept': 'text/html'}
+      {'Accept': 'application/json'}
     )
     .end(result => res.json(result.body))
 })
