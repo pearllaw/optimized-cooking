@@ -59,7 +59,7 @@ function IngredientList({ classes, ingredientList, deleteIngredient, setCalories
       <Grid item>
       <MuiThemeProvider theme={theme}>
         <Button className={classes.button}
-          href="#get-recipes"
+          href={dailyCalories ? "#recipes-by-calorie" : "#get-recipes"}
           variant="contained"
           color="primary">Generate Recipes</Button>
       </MuiThemeProvider>

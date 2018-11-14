@@ -4,6 +4,7 @@ import hash from './hash'
 import Ingredients from './containers/ingredients'
 import GeneratedRecipes from './containers/generated-recipes'
 import ViewRecipe from './containers/view-recipe'
+import RecipebyCalories from './containers/view-calorie-recipe'
 import RecipeCollection from './containers/view-recipe-collection'
 import ViewGroceries from './containers/view-grocery-list'
 import MakeRecipe from './containers/make-recipe'
@@ -33,6 +34,8 @@ export default class Recipes extends Component {
         return <Ingredients />
       case 'get-recipes':
         return <GeneratedRecipes />
+      case 'recipes-by-calorie':
+        return <RecipebyCalories />
       case 'view-recipe':
         return <ViewRecipe id={id} />
       case 'recipe-collection':
