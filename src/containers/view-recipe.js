@@ -76,7 +76,6 @@ export default class ViewRecipe extends Component {
 
   componentDidMount() {
     const { id } = this.state.view.params
-    const { recipeInfo } = this.state
     fetch('/my-recipes')
       .then(res => res.json())
       .then(data => data.map(item => item.recipeId))
@@ -100,7 +99,7 @@ export default class ViewRecipe extends Component {
   }
 
   render() {
-    const { recipeInfo, isFavorited, nutrition } = this.state
+    const { recipeInfo, isFavorited } = this.state
     if (recipeInfo.length === 0) return null
     return (
       <Fragment>

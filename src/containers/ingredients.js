@@ -13,6 +13,7 @@ export default class Ingredients extends Component {
     this.addIngredient = this.addIngredient.bind(this)
     this.deleteIngredient = this.deleteIngredient.bind(this)
     this.setCalories = this.setCalories.bind(this)
+    this.getRecipebyCal = this.getRecipebyCal.bind(this)
   }
 
   handleSubmit(e) {
@@ -49,6 +50,17 @@ export default class Ingredients extends Component {
     this.setState({ dailyCalories: e.target.value })
   }
 
+  getRecipebyCal() {
+    const totalCalories = {
+      calories: this.state.dailyCalories
+    }
+    fetch('/daily-calories/1', {
+      method: 'PUT',
+      body: JSON.stringify(totalCalories),
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+    })
+  }
+
   componentDidMount() {
     fetch('/ingredients')
       .then(res => res.json())
@@ -64,7 +76,8 @@ export default class Ingredients extends Component {
         <IngredientList ingredientList={ingredientList}
           deleteIngredient={this.deleteIngredient}
           setCalories={this.setCalories}
-          dailyCalories={dailyCalories} />
+          dailyCalories={dailyCalories}
+          getRecipebyCal={this.getRecipebyCal} />
         }
       </div>
     )

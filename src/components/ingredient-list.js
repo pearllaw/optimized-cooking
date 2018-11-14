@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 })
 
 
-function IngredientList({ classes, ingredientList, deleteIngredient, setCalories, dailyCalories }) {
+function IngredientList({ classes, ingredientList, deleteIngredient, setCalories, dailyCalories, getRecipebyCal }) {
   return (
     <Grid container
       alignItems="center"
@@ -61,7 +61,8 @@ function IngredientList({ classes, ingredientList, deleteIngredient, setCalories
         <Button className={classes.button}
           href={dailyCalories ? "#recipes-by-calorie" : "#get-recipes"}
           variant="contained"
-          color="primary">Generate Recipes</Button>
+          color="primary"
+          onClick={dailyCalories ? getRecipebyCal : null}>Generate Recipes</Button>
       </MuiThemeProvider>
       </Grid>
       }
