@@ -1,7 +1,6 @@
 import React from 'react'
-import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme, Typography} from '@material-ui/core'
+import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme, Typography, Input} from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
-import CalorieForm from './calorie-form'
 
 const styles = theme => ({
   button: {
@@ -9,7 +8,14 @@ const styles = theme => ({
   },
   list: window.screen.availWidth < 760
   ? { width: 260, border: '1px solid silver', borderRadius: '0.25rem' }
-  : { width: 560, border: '1px solid silver', borderRadius: '0.25rem' }
+  : { width: 560, border: '1px solid silver', borderRadius: '0.25rem' },
+  form: {
+    fontSize: '1rem'
+  },
+  input: {
+    marginLeft: 15,
+    width: '15%'
+  }
 })
 
 const theme = createMuiTheme({
@@ -22,7 +28,7 @@ const theme = createMuiTheme({
 })
 
 
-function IngredientList({ classes, ingredientList, deleteIngredient }) {
+function IngredientList({ classes, ingredientList, deleteIngredient, setCalories, dailyCalories }) {
   return (
     <Grid container
       alignItems="center"
@@ -41,7 +47,13 @@ function IngredientList({ classes, ingredientList, deleteIngredient }) {
           </List>
       </Grid>
       <Grid item>
-        <CalorieForm/>
+        <Typography component="h3"
+          className={classes.form}>My daily calorie maximum is:
+          <span><Input placeholder="2500"
+            className={classes.input}
+            onChange={setCalories}
+            value={dailyCalories} /></span>
+        </Typography>
       </Grid>
       {ingredientList.length > 0 &&
       <Grid item>

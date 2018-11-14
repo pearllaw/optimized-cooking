@@ -6,11 +6,13 @@ export default class Ingredients extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ingredientList: []
+      ingredientList: [],
+      dailyCalories: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addIngredient = this.addIngredient.bind(this)
     this.deleteIngredient = this.deleteIngredient.bind(this)
+    this.setCalories = this.setCalories.bind(this)
   }
 
   handleSubmit(e) {
@@ -43,6 +45,10 @@ export default class Ingredients extends Component {
     this.setState({ ingredientList: updatedList })
   }
 
+  setCalories(e) {
+    this.setState({ dailyCalories: e.target.value })
+  }
+
   componentDidMount() {
     fetch('/ingredients')
       .then(res => res.json())
@@ -50,13 +56,15 @@ export default class Ingredients extends Component {
   }
 
   render() {
-    const { ingredientList } = this.state
+    const { ingredientList, dailyCalories } = this.state
     return (
       <div>
         <IngredientForm handleSubmit={this.handleSubmit} />
         {ingredientList.length > 0 &&
         <IngredientList ingredientList={ingredientList}
-          deleteIngredient={this.deleteIngredient} />
+          deleteIngredient={this.deleteIngredient}
+          setCalories={this.setCalories}
+          dailyCalories={dailyCalories} />
         }
       </div>
     )
