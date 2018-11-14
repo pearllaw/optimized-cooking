@@ -8,6 +8,11 @@ export default class RecipebyCalories extends Component {
     this.state = {
       recipes: []
     }
+    this.reload = this.reload.bind(this)
+  }
+
+  reload() {
+    window.location.reload()
   }
 
   componentDidMount() {
@@ -26,7 +31,7 @@ export default class RecipebyCalories extends Component {
     if (recipes.length === 0) return null
     return (
       <Fragment>
-        <MealsByCal recipes={recipes} />
+        <MealsByCal recipes={recipes} reload={this.reload} />
         <Nutrition recipes={recipes} />
       </Fragment>
     )
