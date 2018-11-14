@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import MealsByCal from '../components/meals-by-cal'
+import Nutrition from '../components/nutritional-info'
 
 export default class RecipebyCalories extends Component {
   constructor(props) {
@@ -12,15 +13,22 @@ export default class RecipebyCalories extends Component {
   componentDidMount() {
     fetch('/daily-calories')
       .then(res => res.json())
-      .then(result => console.log(result[0].calories))
-    // fetch(`/nutritional?number=${dailyCalories}`)
-    //   .then(res => console.log(res.json()))
-
+      .then(result => result[0].calories)
+      .then(cals => {
+        return fetch(`/nutritional?number=${cals}`)
+          .then(res => res.json())
+          .then(recipes => this.setState({ recipes: recipes }))
+      })
   }
 
   render() {
+    const { recipes } = this.state
+    if (recipes.length === 0) return null
     return (
-      <MealsByCal />
+      <Fragment>
+        <MealsByCal recipes={recipes} />
+        <Nutrition recipes={recipes} />
+      </Fragment>
     )
   }
 }
