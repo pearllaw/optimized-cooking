@@ -80,14 +80,13 @@ const styles = theme => ({
     transition: theme.transitions.create('opacity'),
   },
   subtitle: {
-    marginTop: 40,
-    marginBottom: 70
+    margin: 80,
+    display: 'flex',
+    justifyContent: 'center'
   },
   button: {
     color: theme.palette,
-    marginRight: 100,
-    marginBottom: 50,
-    float: 'right'
+    marginLeft: 30
   }
 })
 
@@ -100,7 +99,7 @@ const theme = createMuiTheme({
   }
 })
 
-function MealsByCal({ classes, recipes, reload, getInstructions }) {
+function MealsByCal({ classes, recipes, reload }) {
     return (
     <div>
       <Typography variant="h3" align="center" className={classes.heading}>Customized Meals Just For You</Typography>
@@ -129,14 +128,13 @@ function MealsByCal({ classes, recipes, reload, getInstructions }) {
         ))}
       </div>
       <div className={classes.subtitle}>
-        <Typography variant="h5" align="center">Want different recipes?
-          <MuiThemeProvider theme={theme}>
-            <Button className={classes.button}
-              color="primary"
-              variant="contained"
-              onClick={reload}>Shake It Up</Button>
-          </MuiThemeProvider>
-        </Typography>
+      <Typography variant="h5">Want different recipes?</Typography>
+      <span><MuiThemeProvider theme={theme}>
+        <Button className={classes.button}
+          color="primary"
+          variant="contained"
+          onClick={reload}>Shake It Up</Button>
+      </MuiThemeProvider></span>
       </div>
     </div>
     )
