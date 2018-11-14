@@ -25,8 +25,7 @@ const styles = {
   }
 }
 
-function RecipeList({ classes, recipes }) {
-    if(!recipes) return <div>Loading...</div>
+function MealsByCal({ classes, recipes }) {
     return (
       <div>
       <Typography variant="h3" align="center" className={classes.heading}>What Looks Good?</Typography>
@@ -50,4 +49,4 @@ function RecipeList({ classes, recipes }) {
     )
 }
 
-export default withStyles(styles)(RecipeList)
+export default withStyles(styles)(MealsByCal)
