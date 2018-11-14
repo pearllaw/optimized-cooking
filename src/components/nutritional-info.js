@@ -2,8 +2,17 @@ import React from 'react'
 import { withStyles, Typography, Grid, Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core'
 
 const styles = {
+  container: {
+    border: '1px solid silver',
+    borderRadius: '0.25rem',
+    width: '80%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    padding: 40,
+    marginBottom: 50
+  },
   heading: {
-    padding: 20
+    paddingBottom: 10
   },
   table: {
     width: 800
@@ -23,7 +32,8 @@ function Nutrition({ classes, recipes }) {
   return (
     <Grid container
       direction="column"
-      alignItems="center">
+      alignItems="center"
+      className={classes.container}>
       <Grid item>
         <Typography variant="h5" className={classes.heading}>Nutritional Information</Typography>
       </Grid>
