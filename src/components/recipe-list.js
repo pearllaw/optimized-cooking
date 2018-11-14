@@ -1,7 +1,7 @@
 import React from 'react'
 import { GridList, GridListTile, GridListTileBar, Typography, withStyles } from '@material-ui/core/'
 
-const styles = theme => ({
+const styles = {
   heading: {
     marginTop: 100,
     marginBottom: 80
@@ -23,7 +23,7 @@ const styles = theme => ({
       'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
       'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   }
-})
+}
 
 function RecipeList({ classes, recipes }) {
     if(!recipes) return <div>Loading...</div>
