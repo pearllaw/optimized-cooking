@@ -111,7 +111,7 @@ function MealsByCal({ classes, recipes, reload, getInstructions }) {
             focusRipple
             className={classes.image}
             focusVisibleClassName={classes.focusVisible}
-            style={{ width: '33%'}}
+            style={{ width: 100/3 + '%'}}
             href={`#view-recipe?id=${meal.id}`}>
             <span className={classes.imageSrc}
               style={{ backgroundImage: `url(https://spoonacular.com/recipeImages/${meal.image})` }} />
