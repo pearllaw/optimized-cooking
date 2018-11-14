@@ -9,7 +9,6 @@ export default class RecipebyCalories extends Component {
       recipes: []
     }
     this.reload = this.reload.bind(this)
-    // this.getInstructions = this.getInstructions.bind(this)
   }
 
   reload() {
