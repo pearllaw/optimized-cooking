@@ -100,7 +100,7 @@ const theme = createMuiTheme({
   }
 })
 
-function MealsByCal({ classes, recipes, reload }) {
+function MealsByCal({ classes, recipes, reload, getInstructions }) {
     return (
     <div>
       <Typography variant="h3" align="center" className={classes.heading}>Customized Meals Just For You</Typography>
@@ -111,7 +111,8 @@ function MealsByCal({ classes, recipes, reload }) {
             focusRipple
             className={classes.image}
             focusVisibleClassName={classes.focusVisible}
-            style={{ width: '33%'}}>
+            style={{ width: '33%'}}
+            href={`#view-recipe?id=${meal.id}`}>
             <span className={classes.imageSrc}
               style={{ backgroundImage: `url(https://spoonacular.com/recipeImages/${meal.image})` }} />
             <span className={classes.imageBackdrop} />

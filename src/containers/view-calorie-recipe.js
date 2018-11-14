@@ -9,6 +9,7 @@ export default class RecipebyCalories extends Component {
       recipes: []
     }
     this.reload = this.reload.bind(this)
+    // this.getInstructions = this.getInstructions.bind(this)
   }
 
   reload() {
@@ -31,7 +32,8 @@ export default class RecipebyCalories extends Component {
     if (recipes.length === 0) return null
     return (
       <Fragment>
-        <MealsByCal recipes={recipes} reload={this.reload} />
+        <MealsByCal recipes={recipes}
+          reload={this.reload} />
         <Nutrition recipes={recipes} />
       </Fragment>
     )
