@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, Grid, Typography, List, ListItemText, ButtonBase, Card, CardMedia, CardContent, CardHeader } from '@material-ui/core'
+import { withStyles, Grid, Typography, List, ListItemText, ButtonBase, Card, CardMedia, CardContent } from '@material-ui/core'
 
 const styles = {
   container: {
@@ -35,9 +35,15 @@ const styles = {
     bottom: '30px',
     right: '10px'
   },
+  messageContainer: {
+    marginTop: 100,
+    border: '1px solid silver',
+    borderRadius: '1rem',
+    boxShadow: 'none',
+    padding: 30
+  },
   message: {
-    marginTop: 150,
-    fontSize: '2rem'
+    fontSize: '1.2rem'
   }
 }
 
@@ -71,8 +77,13 @@ function MyRecipes({ classes, savedRecipes, deleteRecipe }) {
           })}
         </List>
         </Grid>
-        : <Typography variant="h5"
-          className={classes.message}>You do not have any saved recipes</Typography>
+        : <Card className={classes.messageContainer}>
+            <CardContent>
+              <Typography variant="h3"
+                className={classes.message}>You do not have any saved recipes
+              </Typography>
+            </CardContent>
+          </Card>
         }
       </Grid>
   )
