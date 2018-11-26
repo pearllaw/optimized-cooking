@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import MyRecipes from '../components/my-recipes'
-import { Typography } from '@material-ui/core';
 
 export default class RecipeCollection extends Component {
   constructor(props) {

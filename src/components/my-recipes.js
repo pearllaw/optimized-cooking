@@ -12,25 +12,28 @@ const styles = {
   card: {
     display: 'flex',
     margin: 15,
-    height: 100
-  },
-  content: {
-    flex: '1 0 auto',
+    height: 100,
+    width: 500
   },
   details: {
     display: 'flex',
-    alignItems: 'center',
-    width: 360
+    alignItems: 'center'
+  },
+  content: {
+    display: 'inline-block',
+    width: 300
   },
   image: {
-    width: 150,
+    width: 200,
   },
   icon: {
     fontSize: '120%',
     fontWeight: 600,
     opacity: 0.8,
     padding: '5px',
-    position: 'absolute'
+    position: 'relative',
+    bottom: '30px',
+    right: '10px'
   },
   message: {
     marginTop: 150,
@@ -51,19 +54,19 @@ function MyRecipes({ classes, savedRecipes, deleteRecipe }) {
           <List className={classes.list}>
           {savedRecipes.map(recipe => {
           return <Card className={classes.card} key={recipe.recipeId}>
-              <i className={`material-icons ${classes.icon}`}
-                id={recipe.id}
-                onClick={deleteRecipe}>clear</i>
               <CardMedia className={classes.image}
                 image={recipe.image}
                 title="My Saved Recipe" />
-                <div className={classes.details}>
-                  <CardContent className={classes.content}>
-                    <ButtonBase href={`#view-recipe?id=${recipe.recipeId}`}>
-                      <ListItemText primary={recipe.title} />
-                    </ButtonBase>
-                  </CardContent>
-                </div>
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <ButtonBase href={`#view-recipe?id=${recipe.recipeId}`}>
+                    <ListItemText primary={recipe.title} />
+                  </ButtonBase>
+                </CardContent>
+                <i className={`material-icons ${classes.icon}`}
+                id={recipe.id}
+                onClick={deleteRecipe}>clear</i>
+              </div>
             </Card>
           })}
         </List>
