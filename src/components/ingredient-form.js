@@ -8,8 +8,7 @@ const styles = {
     marginTop: 100
   },
   title: {
-    color: 'white',
-    fontWeight: 300
+    color: 'white'
   },
   root: {
     color: 'white'
@@ -44,7 +43,8 @@ const theme = createMuiTheme({
         borderColor: 'white'
       },
       focused: {
-        borderColor: 'white'
+        borderColor: 'white',
+        borderWidth: '1px'
       }
     },
     MuiInputBase: {

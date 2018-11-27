@@ -18,7 +18,7 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     height: 767,
-    opacity: 0.9
+    opacity: 0.85
   }
 }
 
