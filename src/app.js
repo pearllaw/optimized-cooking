@@ -17,7 +17,8 @@ const styles = {
     backgroundImage: `url(${backgroundUrl})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    height: 767
+    height: 767,
+    opacity: 0.9
   }
 }
 
@@ -66,7 +67,7 @@ class Recipes extends Component {
     const { path } = this.state.view
     const { classes } = this.props
     return (
-      <div className={ path === 'list' ? classes.background : null }>
+      <div className={ path === 'list' || path === '' ? classes.background : null }>
         <Nav/>
         {this.renderView()}
       </div>

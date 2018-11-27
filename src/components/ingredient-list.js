@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme, Typography, Input} from '@material-ui/core'
+import {Typography, Input, Icon, Grid, List, ListItem, ListItemText, Button, withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 
 const styles = theme => ({
@@ -7,20 +7,36 @@ const styles = theme => ({
     color: theme.palette
   },
   list: window.screen.availWidth < 760
-  ? { width: 260, border: '1px solid silver', borderRadius: '0.25rem' }
-  : { width: 560, border: '1px solid silver', borderRadius: '0.25rem' },
+  ? { width: 260, border: '1px solid white', borderRadius: '0.25rem' }
+  : { width: 560, border: '1px solid white', borderRadius: '0.25rem' },
+  icon: {
+    color: 'white'
+  },
   form: {
-    fontSize: '1rem'
+    fontSize: '1.1rem',
+    color: 'white'
   },
   input: {
     marginLeft: 15,
-    width: '15%'
+    width: '12%',
+    color: 'white',
+    fontSize: '1.1rem',
+    borderBottom: '1px solid white'
   }
 })
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: blue
+  },
+  overrides: {
+    MuiListItemText: {
+      primary: {
+        color: '#fff',
+        fontSize: '1.1rem',
+        fontWeight: 500
+      }
+    }
   },
   typography: {
     useNextVariants: true,
@@ -38,10 +54,12 @@ function IngredientList({ classes, ingredientList, deleteIngredient, setCalories
           <List className={classes.list}>
           {ingredientList.map(item => {
             return <ListItem key={item.id}>
-              <ListItemText primary={item.ingredient}/>
-              <i className="material-icons"
+              <MuiThemeProvider theme={theme}>
+                <ListItemText primary={item.ingredient} />
+              </MuiThemeProvider>
+              <Icon className={classes.icon}
                 id={item.id}
-                onClick={deleteIngredient}>clear</i>
+                onClick={deleteIngredient}>clear</Icon>
             </ListItem>
           })}
           </List>
@@ -52,7 +70,8 @@ function IngredientList({ classes, ingredientList, deleteIngredient, setCalories
           <span><Input placeholder="2500"
             className={classes.input}
             onChange={setCalories}
-            value={dailyCalories} /></span>
+            value={dailyCalories}
+            disableUnderline /></span>
         </Typography>
       </Grid>
       {ingredientList.length > 0 &&
