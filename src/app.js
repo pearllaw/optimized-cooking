@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, { Component } from 'react'
 import Nav from './components/navbar'
 import hash from './hash'
 import Ingredients from './containers/ingredients'
@@ -9,8 +9,19 @@ import RecipeCollection from './containers/view-recipe-collection'
 import ViewGroceries from './containers/view-grocery-list'
 import MakeRecipe from './containers/make-recipe'
 import CompletedMessage from './components/completed-message'
+import { withStyles } from '@material-ui/core'
 
-export default class Recipes extends Component {
+const backgroundUrl = 'https://d39l2hkdp2esp1.cloudfront.net/img/photo/126844/126844_00_2x.jpg?20170622031731'
+const styles = {
+  background: {
+    backgroundImage: `url(${backgroundUrl})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    height: 767
+  }
+}
+
+class Recipes extends Component {
   constructor(props) {
     super(props)
     const { path, params } = hash.parse(location.hash)
@@ -52,11 +63,15 @@ export default class Recipes extends Component {
   }
 
   render () {
+    const { path } = this.state.view
+    const { classes } = this.props
     return (
-      <Fragment>
+      <div className={ path === 'list' ? classes.background : null }>
         <Nav/>
         {this.renderView()}
-      </Fragment>
+      </div>
     )
   }
 }
+
+export default withStyles(styles)(Recipes)
