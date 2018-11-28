@@ -42,14 +42,18 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
               action={
                 <IconButton onClick={handleClick}>
                   {isFavorited === false
-                    ?  <i className="far fa-heart" onClick={saveRecipe}></i>
-                    : <i className="fas fa-heart" onClick={deleteRecipe}></i>
+                    ?  <i className="material-icons" onClick={saveRecipe}>favorite_border</i>
+                    : <i className="material-icons" onClick={deleteRecipe}>favorite</i>
                   }
                 </IconButton>
               }
             />
             <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
-            <Typography className={classes.subtitle} color="textSecondary">{`Prep Time: ${recipeInfo.preparationMinutes} minutes`}</Typography>
+            {recipeInfo.preparationMinutes !== undefined &&
+            <Typography className={classes.subtitle}
+              color="textSecondary">
+              {`Prep Time: ${recipeInfo.preparationMinutes} minutes`}
+            </Typography>}
             <CardMedia
               className={classes.image}
               component="img"
