@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Nav from './components/navbar'
 import hash from './hash'
 import Ingredients from './containers/ingredients'
@@ -67,10 +67,12 @@ class Recipes extends Component {
     const { path } = this.state.view
     const { classes } = this.props
     return (
-      <div className={ path === 'list' || path === '' ? classes.background : null }>
+      <Fragment>
         <Nav/>
-        {this.renderView()}
-      </div>
+        <div className={ path === 'list' || path === '' ? classes.background : null }>
+          {this.renderView()}
+        </div>
+      </Fragment>
     )
   }
 }

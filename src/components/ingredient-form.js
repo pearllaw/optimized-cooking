@@ -4,10 +4,10 @@ import AddIcon from '@material-ui/icons/Add'
 
 const styles = {
   container: {
-    textAlign: 'center',
-    marginTop: 100
+    textAlign: 'center'
   },
   title: {
+    paddingTop: 100,
     color: 'white'
   },
   root: {
@@ -39,9 +39,6 @@ const theme = createMuiTheme({
       }
     },
     MuiNotchedOutline: {
-      root: {
-        borderColor: 'white'
-      },
       focused: {
         borderColor: 'white',
         borderWidth: '1px'
@@ -59,7 +56,10 @@ const theme = createMuiTheme({
     },
     MuiOutlinedInput: {
       root: {
-        color: 'white !important'
+        color: 'white'
+      },
+      notchedOutline: {
+        borderColor: 'white'
       }
     }
   },
@@ -80,9 +80,8 @@ function IngredientForm({ classes, handleSubmit }) {
               label="Add an ingredient"
               margin="normal"
               variant="outlined"
-              autoComplete="true"
               required />
-            </MuiThemeProvider>
+          </MuiThemeProvider>
           <Button
             className={classes.button}
             type="submit"
