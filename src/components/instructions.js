@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles } from '@material-ui/core'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles, CardActions, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { FacebookShareButton, TwitterShareButton, EmailShareButton, FacebookIcon, TwitterIcon, EmailIcon } from 'react-share'
 
 const styles = {
   container: {
@@ -7,6 +8,9 @@ const styles = {
   },
   card: {
     boxShadow: 'none'
+  },
+  action: {
+    display: 'flex'
   },
   subtitle: {
     paddingRight: '24px',
@@ -29,6 +33,24 @@ const styles = {
   }
 }
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiCardHeader: {
+      action: {
+        marginTop: 0
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: 0
+      }
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+})
+
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
   const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
   const source = recipeInfo.sourceUrl
@@ -37,19 +59,40 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
       <Grid container className={classes.container}>
         <Grid item xs={6}>
           <Card className={classes.card}>
+          <MuiThemeProvider theme={theme}>
             <CardHeader
               title={recipeInfo.title}
               action={
-                <IconButton onClick={handleClick}>
+                <CardActions className={classes.action}>
+                  <IconButton onClick={handleClick}>
                   {isFavorited === false
-                    ?  <i className="far fa-heart" onClick={saveRecipe}></i>
-                    : <i className="fas fa-heart" onClick={deleteRecipe}></i>
+                    ?  <i className="material-icons" style={{fontSize: '30px'}} onClick={saveRecipe}>favorite_border</i>
+                    : <i className="material-icons" style={{fontSize: '30px'}} onClick={deleteRecipe}>favorite</i>
                   }
-                </IconButton>
+                  </IconButton>
+                  <FacebookShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    quote={recipeInfo.title}>
+                    <FacebookIcon size={30} round />
+                  </FacebookShareButton>
+                  <TwitterShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    title={recipeInfo.title}
+                    hashtags={['optimizedcooking', 'whippingUp', `${recipeInfo.title}`]}>
+                    <TwitterIcon size={30} round />
+                  </TwitterShareButton>
+                  <EmailShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    subject={`Check out this recipe- ${recipeInfo.title}`}>
+                    <EmailIcon size={30} round />
+                  </EmailShareButton>
+                </CardActions>
               }
             />
+            </MuiThemeProvider>
             <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
-            <Typography className={classes.subtitle} color="textSecondary">{`Prep Time: ${recipeInfo.preparationMinutes} minutes`}</Typography>
+            {recipeInfo.preparationMinutes !== undefined &&
+            <Typography className={classes.subtitle}
+              color="textSecondary">
+              {`Prep Time: ${recipeInfo.preparationMinutes} minutes`}
+            </Typography>}
             <CardMedia
               className={classes.image}
               component="img"
