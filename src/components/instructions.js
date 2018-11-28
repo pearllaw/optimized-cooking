@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles } from '@material-ui/core'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles, CardActions } from '@material-ui/core'
+import { FacebookShareButton, FacebookIcon } from 'react-share'
 
 const styles = {
   container: {
@@ -7,6 +8,9 @@ const styles = {
   },
   card: {
     boxShadow: 'none'
+  },
+  action: {
+    display: 'flex'
   },
   subtitle: {
     paddingRight: '24px',
@@ -40,12 +44,17 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
             <CardHeader
               title={recipeInfo.title}
               action={
-                <IconButton onClick={handleClick}>
+                <CardActions className={classes.action}>
+                  <IconButton onClick={handleClick}>
                   {isFavorited === false
-                    ?  <i className="material-icons" onClick={saveRecipe}>favorite_border</i>
-                    : <i className="material-icons" onClick={deleteRecipe}>favorite</i>
+                    ?  <i className="material-icons" style={{fontSize: '30px'}} onClick={saveRecipe}>favorite_border</i>
+                    : <i className="material-icons" style={{fontSize: '30px'}} onClick={deleteRecipe}>favorite</i>
                   }
-                </IconButton>
+                  </IconButton>
+                  <FacebookShareButton className={classes.share} url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`} quote={recipeInfo.title}>
+                    <FacebookIcon size={30} round />
+                  </FacebookShareButton>
+                </CardActions>
               }
             />
             <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
