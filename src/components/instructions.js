@@ -1,6 +1,6 @@
 import React from 'react'
-import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles, CardActions } from '@material-ui/core'
-import { FacebookShareButton, FacebookIcon } from 'react-share'
+import { Grid, Card, Typography, List, ListItemText, ListItem, CardMedia, CardContent, CardHeader, IconButton, withStyles, CardActions, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { FacebookShareButton, TwitterShareButton, EmailShareButton, FacebookIcon, TwitterIcon, EmailIcon } from 'react-share'
 
 const styles = {
   container: {
@@ -33,6 +33,24 @@ const styles = {
   }
 }
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiCardHeader: {
+      action: {
+        marginTop: 0
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: 0
+      }
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+})
+
 function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecipe, deleteRecipe }) {
   const instructions = recipeInfo.analyzedInstructions.flatMap(list => list.steps)
   const source = recipeInfo.sourceUrl
@@ -41,6 +59,7 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
       <Grid container className={classes.container}>
         <Grid item xs={6}>
           <Card className={classes.card}>
+          <MuiThemeProvider theme={theme}>
             <CardHeader
               title={recipeInfo.title}
               action={
@@ -51,12 +70,23 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
                     : <i className="material-icons" style={{fontSize: '30px'}} onClick={deleteRecipe}>favorite</i>
                   }
                   </IconButton>
-                  <FacebookShareButton className={classes.share} url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`} quote={recipeInfo.title}>
+                  <FacebookShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    quote={recipeInfo.title}>
                     <FacebookIcon size={30} round />
                   </FacebookShareButton>
+                  <TwitterShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    title={recipeInfo.title}
+                    hashtags={['optimizedcooking', 'whippingUp', `${recipeInfo.title}`]}>
+                    <TwitterIcon size={30} round />
+                  </TwitterShareButton>
+                  <EmailShareButton url={`https://optimized-cooking.herokuapp.com/#view-recipe?id=${recipeInfo.id}`}
+                    subject={`Check out this recipe- ${recipeInfo.title}`}>
+                    <EmailIcon size={30} round />
+                  </EmailShareButton>
                 </CardActions>
               }
             />
+            </MuiThemeProvider>
             <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
             {recipeInfo.preparationMinutes !== undefined &&
             <Typography className={classes.subtitle}
