@@ -3,6 +3,7 @@ import hash from '../hash'
 import Instructions from '../components/instructions'
 import GroceryButton from '../components/grocery-button'
 import RecipeButton from '../components/recipe-button'
+import MealPopup from '../components/meal-options'
 
 export default class ViewRecipe extends Component {
   constructor(props) {
@@ -11,10 +12,12 @@ export default class ViewRecipe extends Component {
     this.state = {
       recipeInfo: [],
       isFavorited: false,
+      open: false,
       savedRecipes: [],
       view: { path, params }
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.getRecipeInfo = this.getRecipeInfo.bind(this)
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
@@ -22,7 +25,14 @@ export default class ViewRecipe extends Component {
   }
 
   handleClick() {
-    this.setState({ isFavorited: !this.state.isFavorited })
+    this.setState({
+      isFavorited: !this.state.isFavorited,
+      open: true
+    })
+  }
+
+  handleClose() {
+    this.setState({ open: false })
   }
 
   getRecipeInfo() {
@@ -99,7 +109,7 @@ export default class ViewRecipe extends Component {
   }
 
   render() {
-    const { recipeInfo, isFavorited } = this.state
+    const { recipeInfo, isFavorited, open } = this.state
     if (recipeInfo.length === 0) return null
     return (
       <Fragment>
@@ -110,6 +120,7 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
+          <MealPopup open={open} handleClose={this.handleClose} />
           <RecipeButton />
           <GroceryButton />
       </Fragment>

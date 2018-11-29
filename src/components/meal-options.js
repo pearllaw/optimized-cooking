@@ -1,22 +1,13 @@
-import React, { Component } from 'react'
-import { withStyles, DialogTitle, DialogContent, DialogContentText, ListItem, ListItemText } from '@material-ui/core'
+import React from 'react'
+import { withStyles, Dialog, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemText, Checkbox, DialogActions, Button } from '@material-ui/core'
 
 const styles = {
 
 }
 
-class MealPopup extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false
-    }
-  }
-
-  render() {
-    const { open } = this.state
-    return (
-    <Dialog open={open} onClose={this.handleClose}>
+function MealPopup({ open, handleClose }) {
+  return (
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Save to My Recipes</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -41,9 +32,11 @@ class MealPopup extends Component {
           </ListItem>
         </List>
       </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">Save</Button>
+      </DialogActions>
     </Dialog>
-    )
-  }
+  )
 }
 
 export default withStyles(styles)(MealPopup)
