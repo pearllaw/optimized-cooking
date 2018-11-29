@@ -1,12 +1,33 @@
 import React from 'react'
-import { withStyles, Dialog, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemText, Checkbox, DialogActions, Button } from '@material-ui/core'
+import { withStyles, createMuiTheme, MuiThemeProvider, Dialog, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemText, Checkbox, DialogActions, Button } from '@material-ui/core'
 
-const styles = {
-
-}
+const theme = createMuiTheme({
+  overrides: {
+    MuiDialog: {
+      paperScrollPaper: {
+        maxHeight: null
+      }
+    },
+    MuiDialogContent: {
+      root: {
+        padding: '0 25px 5px'
+      }
+    },
+    MuiListItem: {
+      root: {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
+    },
+  },
+  typography: {
+    useNextVariants: true
+  }
+})
 
 function MealPopup({ open, handleClose }) {
   return (
+    <MuiThemeProvider theme={theme}>
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Save to My Recipes</DialogTitle>
       <DialogContent>
@@ -36,7 +57,8 @@ function MealPopup({ open, handleClose }) {
         <Button onClick={handleClose} color="primary">Save</Button>
       </DialogActions>
     </Dialog>
+    </MuiThemeProvider>
   )
 }
 
-export default withStyles(styles)(MealPopup)
+export default withStyles(theme)(MealPopup)
