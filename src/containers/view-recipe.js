@@ -120,7 +120,7 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-          <MealPopup open={open} handleClose={this.handleClose} />
+          {isFavorited ? <MealPopup open={open} handleClose={this.handleClose} /> : null}
           <RecipeButton />
           <GroceryButton />
       </Fragment>
