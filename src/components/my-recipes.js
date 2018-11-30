@@ -10,27 +10,29 @@ const styles = theme => ({
     width: '80%',
     marginTop: 60
   },
+  gridList: {
+    width: '100%',
+    maxHeight: 450
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
   },
-  gridList: {
-    maxHeight: 450,
-    width: 990,
-    overflow: 'scroll'
-  },
   image: {
-    width: 946.39/3
+    width: 942.39/3,
+    height: 180
   },
   icon: {
     borderRadius: '50%',
-    border: '1px solid',
+    border: '1.5px solid',
     fontWeight: 600,
     padding: '3px',
     fontSize: '12px',
-    marginRight: '10px',
-    color: 'white'
+    color: 'indianred',
+    position: 'relative',
+    top: 30,
+    left: 280
   },
   messageContainer: {
     padding: 10
@@ -51,6 +53,11 @@ const theme = createMuiTheme({
     MuiPaper: {
       elevation1: {
         boxShadow: 'none'
+      }
+    },
+    GridListTile: {
+      root: {
+        width: '100%'
       }
     }
   },
@@ -92,21 +99,18 @@ class MyRecipes extends Component {
             <Typography className={classes.heading}>Breakfast</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            {breakfast.length > 0
-              ? breakfast.map(item =>
-              <GridList className={classes.gridList} cols={3} key={0}>
-                <GridListTile key={item.recipeId}>
+            <GridList className={classes.gridList}>
+              {breakfast.length > 0
+                ? breakfast.map(item =>
+                  <GridListTile key={item.recipeId} style={{ width: 100/3 + '%' }}>
+                  <i className={`material-icons ${classes.icon}`}
+                    id={item.id}
+                    onClick={deleteRecipe}>clear</i>
                   <a href={`#view-recipe?id=${item.recipeId}`}>
-                    <img src={item.image} alt={item.title} className={classes.image} />
+                  <img src={item.image} alt={item.title} className={classes.image}/>
+                  <GridListTileBar title={item.title} />
                   </a>
-                  <GridListTileBar title={item.title}
-                    actionIcon={
-                    <i className={`material-icons ${classes.icon}`}
-                      id={item.id}
-                      onClick={deleteRecipe}>clear</i>
-                    } />
-                </GridListTile>
-              </GridList>
+                  </GridListTile>
               )
               : <MuiThemeProvider theme={theme}>
                   <Card className={classes.messageContainer}>
@@ -118,6 +122,7 @@ class MyRecipes extends Component {
                   </Card>
                 </MuiThemeProvider>
             }
+            </GridList>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel expanded={expanded === 'lunch'} onChange={this.handleChange('lunch')}>
@@ -125,21 +130,18 @@ class MyRecipes extends Component {
             <Typography className={classes.heading}>Lunch</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
+            <GridList className={classes.gridList}>
               {lunch.length > 0
                 ? lunch.map(item =>
-                <GridList className={classes.gridList} cols={3} key={1}>
-                  <GridListTile key={item.recipeId}>
+                  <GridListTile key={item.recipeId} style={{ width: 100/3 + '%' }}>
+                    <i className={`material-icons ${classes.icon}`}
+                      id={item.id}
+                      onClick={deleteRecipe}>clear</i>
                     <a href={`#view-recipe?id=${item.recipeId}`}>
-                      <img src={item.image} alt={item.title} className={classes.image} />
+                    <img src={item.image} alt={item.title} className={classes.image}/>
+                    <GridListTileBar title={item.title} />
                     </a>
-                    <GridListTileBar title={item.title}
-                      actionIcon={
-                      <i className={`material-icons ${classes.icon}`}
-                        id={item.id}
-                        onClick={deleteRecipe}>clear</i>
-                      } />
                   </GridListTile>
-                </GridList>
                 )
                 : <MuiThemeProvider theme={theme}>
                   <Card className={classes.messageContainer}>
@@ -151,6 +153,7 @@ class MyRecipes extends Component {
                   </Card>
                 </MuiThemeProvider>
               }
+              </GridList>
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <ExpansionPanel expanded={expanded === 'dinner'} onChange={this.handleChange('dinner')}>
@@ -158,21 +161,18 @@ class MyRecipes extends Component {
               <Typography className={classes.heading}>Dinner</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
+            <GridList className={classes.gridList}>
               {dinner.length > 0
                 ? dinner.map(item =>
-                <GridList className={classes.gridList} cols={3} key={2}>
-                  <GridListTile key={item.recipeId}>
+                  <GridListTile key={item.recipeId} style={{ width: 100/3 + '%' }}>
+                    <i className={`material-icons ${classes.icon}`}
+                      id={item.id}
+                      onClick={deleteRecipe}>clear</i>
                     <a href={`#view-recipe?id=${item.recipeId}`}>
-                      <img src={item.image} alt={item.title} className={classes.image} />
+                    <img src={item.image} alt={item.title} className={classes.image}/>
+                    <GridListTileBar title={item.title} />
                     </a>
-                    <GridListTileBar title={item.title}
-                      actionIcon={
-                      <i className={`material-icons ${classes.icon}`}
-                        id={item.id}
-                        onClick={deleteRecipe}>clear</i>
-                      } />
                   </GridListTile>
-                </GridList>
                 )
                 : <MuiThemeProvider theme={theme}>
                   <Card className={classes.messageContainer}>
@@ -184,6 +184,7 @@ class MyRecipes extends Component {
                   </Card>
                 </MuiThemeProvider>
               }
+              </GridList>
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <ExpansionPanel expanded={expanded === 'snack'} onChange={this.handleChange('snack')}>
@@ -191,21 +192,18 @@ class MyRecipes extends Component {
               <Typography className={classes.heading}>Snacks</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
+            <GridList className={classes.gridList}>
               {snack.length > 0
                 ? snack.map(item =>
-                <GridList className={classes.gridList} cols={3} key={3}>
-                  <GridListTile key={item.recipeId}>
+                  <GridListTile key={item.recipeId} style={{ width: 100/3 + '%' }}>
+                    <i className={`material-icons ${classes.icon}`}
+                      id={item.id}
+                      onClick={deleteRecipe}>clear</i>
                     <a href={`#view-recipe?id=${item.recipeId}`}>
-                      <img src={item.image} alt={item.title} className={classes.image} />
+                    <img src={item.image} alt={item.title} className={classes.image}/>
+                    <GridListTileBar title={item.title} />
                     </a>
-                    <GridListTileBar title={item.title}
-                      actionIcon={
-                      <i className={`material-icons ${classes.icon}`}
-                        id={item.id}
-                        onClick={deleteRecipe}>clear</i>
-                      } />
                   </GridListTile>
-                </GridList>
                 )
                 : <MuiThemeProvider theme={theme}>
                   <Card className={classes.messageContainer}>
@@ -217,6 +215,7 @@ class MyRecipes extends Component {
                   </Card>
                 </MuiThemeProvider>
               }
+              </GridList>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>

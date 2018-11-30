@@ -17,12 +17,7 @@ const styles = {
   : { width: 1200, height: 800, transform: 'translateZ(0)' },
   image: window.screen.availWidth < 760
   ? { width: '150px', height: '80px'}
-  : { width: '396px', height: '235px'},
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  }
+  : { width: '396px', height: '235px'}
 }
 
 function RecipeList({ classes, recipes }) {
