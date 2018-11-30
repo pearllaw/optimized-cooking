@@ -3,6 +3,7 @@ import hash from '../hash'
 import Instructions from '../components/instructions'
 import GroceryButton from '../components/grocery-button'
 import RecipeButton from '../components/recipe-button'
+import MealPopup from '../components/meal-options'
 
 export default class ViewRecipe extends Component {
   constructor(props) {
@@ -11,10 +12,19 @@ export default class ViewRecipe extends Component {
     this.state = {
       recipeInfo: [],
       isFavorited: false,
+      open: false,
+      mealCategory: [
+        {meal: 'Breakfast', checked: false},
+        {meal: 'Lunch', checked: false},
+        {meal: 'Dinner', checked: false},
+        {meal: 'Snack', checked: false}
+      ],
       savedRecipes: [],
       view: { path, params }
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
     this.getRecipeInfo = this.getRecipeInfo.bind(this)
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
@@ -22,7 +32,44 @@ export default class ViewRecipe extends Component {
   }
 
   handleClick() {
-    this.setState({ isFavorited: !this.state.isFavorited })
+    const { mealCategory } = this.state
+    this.setState({
+      isFavorited: !this.state.isFavorited,
+      open: true,
+    })
+    const checked = mealCategory.filter(meal => meal.checked)
+    if (this.state.isFavorited && checked) {
+      const updateSavedMeals = mealCategory.map(meal => Object.assign({}, meal, {checked: false}))
+      this.setState({ mealCategory: updateSavedMeals })
+    }
+  }
+
+  handleClose() {
+    const { id } = this.state.view.params
+    const savedMeal = this.state.mealCategory.filter(meal => meal.checked)
+    const mealType = {
+      mealCategory: savedMeal[0].meal
+    }
+    fetch(`/my-recipes?recipeId=${id}`)
+      .then(res => res.json())
+      .then(data => data.map(recipe => {
+        const dataId = recipe.id
+        return fetch(`/my-recipes/${dataId}`, {
+          method: 'PATCH',
+          body: JSON.stringify(mealType),
+          headers: {'Content-Type': 'application/json; charset=utf-8'}
+        })
+      }))
+    this.setState({ open: false })
+  }
+
+  handleCheck(index) {
+    const checkedMeal = this.state.mealCategory.map((meal, mealIndex) => {
+      return mealIndex === index
+        ? Object.assign({}, meal, {checked: !meal.checked})
+        : meal
+    })
+    this.setState({ mealCategory: checkedMeal })
   }
 
   getRecipeInfo() {
@@ -99,7 +146,7 @@ export default class ViewRecipe extends Component {
   }
 
   render() {
-    const { recipeInfo, isFavorited } = this.state
+    const { recipeInfo, isFavorited, open, mealCategory } = this.state
     if (recipeInfo.length === 0) return null
     return (
       <Fragment>
@@ -110,8 +157,15 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-          <RecipeButton />
-          <GroceryButton />
+        {isFavorited
+          ? <MealPopup open={open}
+            mealCategory={mealCategory}
+            handleClose={this.handleClose}
+            handleCheck={this.handleCheck} />
+          : null
+        }
+        <RecipeButton />
+        <GroceryButton />
       </Fragment>
     )
   }
