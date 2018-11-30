@@ -26,6 +26,7 @@ const theme = createMuiTheme({
 })
 
 function MealPopup({ open, handleClose }) {
+  const categories = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
   return (
     <MuiThemeProvider theme={theme}>
     <Dialog open={open} onClose={handleClose}>
@@ -35,22 +36,12 @@ function MealPopup({ open, handleClose }) {
           Select a meal category to add this recipe to.
         </DialogContentText>
         <List>
-          <ListItem>
-            <Checkbox color="primary" />
-            <ListItemText primary="Breakfast"/>
+          {categories.map((type, index) =>
+          <ListItem key={index}>
+            <Checkbox key={index} color="primary" />
+            <ListItemText primary={type} id={type} />
           </ListItem>
-          <ListItem>
-            <Checkbox color="primary" />
-            <ListItemText primary="Lunch"/>
-          </ListItem>
-          <ListItem>
-            <Checkbox color="primary" />
-            <ListItemText primary="Dinner"/>
-          </ListItem>
-          <ListItem>
-            <Checkbox color="primary" />
-            <ListItemText primary="Snack"/>
-          </ListItem>
+          )}
         </List>
       </DialogContent>
       <DialogActions>

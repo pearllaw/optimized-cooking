@@ -36,6 +36,7 @@ function GroceryList ({ classes, groceries, handleCheck }) {
             return <ListItem key={index}>
               <Checkbox
                 key={index}
+                color="primary"
                 checked={grocery.checked}
                 onChange={() => handleCheck(index)} />
                 <ListItemText primary={grocery.item} />
