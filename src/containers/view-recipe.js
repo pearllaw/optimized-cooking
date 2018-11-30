@@ -13,11 +13,18 @@ export default class ViewRecipe extends Component {
       recipeInfo: [],
       isFavorited: false,
       open: false,
+      mealCategory: [
+        {meal: 'Breakfast', checked: false},
+        {meal: 'Lunch', checked: false},
+        {meal: 'Dinner', checked: false},
+        {meal: 'Snack', checked: false}
+      ],
       savedRecipes: [],
       view: { path, params }
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
     this.getRecipeInfo = this.getRecipeInfo.bind(this)
     this.saveRecipe = this.saveRecipe.bind(this)
     this.deleteRecipe = this.deleteRecipe.bind(this)
@@ -33,6 +40,15 @@ export default class ViewRecipe extends Component {
 
   handleClose() {
     this.setState({ open: false })
+  }
+
+  handleCheck(index) {
+    const checkedMeal = this.state.mealCategory.map((meal, mealIndex) => {
+      return mealIndex === index
+        ? Object.assign({}, meal, {checked: !meal.checked})
+        : meal
+    })
+    this.setState({ mealCategory: checkedMeal })
   }
 
   getRecipeInfo() {
@@ -109,7 +125,7 @@ export default class ViewRecipe extends Component {
   }
 
   render() {
-    const { recipeInfo, isFavorited, open } = this.state
+    const { recipeInfo, isFavorited, open, mealCategory } = this.state
     if (recipeInfo.length === 0) return null
     return (
       <Fragment>
@@ -120,9 +136,15 @@ export default class ViewRecipe extends Component {
           saveRecipe={this.saveRecipe}
           deleteRecipe={this.deleteRecipe}
           updateSavedRecipes={this.updateSavedRecipes} />
-          {isFavorited ? <MealPopup open={open} handleClose={this.handleClose} /> : null}
-          <RecipeButton />
-          <GroceryButton />
+        {isFavorited
+          ? <MealPopup open={open}
+            mealCategory={mealCategory}
+            handleClose={this.handleClose}
+            handleCheck={this.handleCheck} />
+          : null
+        }
+        <RecipeButton />
+        <GroceryButton />
       </Fragment>
     )
   }
