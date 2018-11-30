@@ -8,7 +8,7 @@ const styles = theme => ({
   },
   root: {
     width: '80%',
-    marginTop: '50px'
+    marginTop: 60
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -94,13 +94,15 @@ class MyRecipes extends Component {
           <ExpansionPanelDetails>
             {breakfast.length > 0
               ? breakfast.map(item =>
-              <GridList className={classes.gridList} cols={3}>
+              <GridList className={classes.gridList} cols={3} key={0}>
                 <GridListTile key={item.recipeId}>
-                  <img src={item.image} alt={item.title} className={classes.image} />
+                  <a href={`#view-recipe?id=${item.recipeId}`}>
+                    <img src={item.image} alt={item.title} className={classes.image} />
+                  </a>
                   <GridListTileBar title={item.title}
                     actionIcon={
                     <i className={`material-icons ${classes.icon}`}
-                      id={item.recipeId}
+                      id={item.id}
                       onClick={deleteRecipe}>clear</i>
                     } />
                 </GridListTile>
@@ -125,13 +127,15 @@ class MyRecipes extends Component {
           <ExpansionPanelDetails>
               {lunch.length > 0
                 ? lunch.map(item =>
-                <GridList className={classes.gridList} cols={3}>
+                <GridList className={classes.gridList} cols={3} key={1}>
                   <GridListTile key={item.recipeId}>
-                    <img src={item.image} alt={item.title} className={classes.image} />
+                    <a href={`#view-recipe?id=${item.recipeId}`}>
+                      <img src={item.image} alt={item.title} className={classes.image} />
+                    </a>
                     <GridListTileBar title={item.title}
                       actionIcon={
                       <i className={`material-icons ${classes.icon}`}
-                        id={item.recipeId}
+                        id={item.id}
                         onClick={deleteRecipe}>clear</i>
                       } />
                   </GridListTile>
@@ -156,13 +160,15 @@ class MyRecipes extends Component {
             <ExpansionPanelDetails>
               {dinner.length > 0
                 ? dinner.map(item =>
-                <GridList className={classes.gridList} cols={3}>
+                <GridList className={classes.gridList} cols={3} key={2}>
                   <GridListTile key={item.recipeId}>
-                    <img src={item.image} alt={item.title} className={classes.image} />
+                    <a href={`#view-recipe?id=${item.recipeId}`}>
+                      <img src={item.image} alt={item.title} className={classes.image} />
+                    </a>
                     <GridListTileBar title={item.title}
                       actionIcon={
                       <i className={`material-icons ${classes.icon}`}
-                        id={item.recipeId}
+                        id={item.id}
                         onClick={deleteRecipe}>clear</i>
                       } />
                   </GridListTile>
@@ -187,13 +193,15 @@ class MyRecipes extends Component {
             <ExpansionPanelDetails>
               {snack.length > 0
                 ? snack.map(item =>
-                <GridList className={classes.gridList} cols={3}>
+                <GridList className={classes.gridList} cols={3} key={3}>
                   <GridListTile key={item.recipeId}>
-                    <img src={item.image} alt={item.title} className={classes.image} />
+                    <a href={`#view-recipe?id=${item.recipeId}`}>
+                      <img src={item.image} alt={item.title} className={classes.image} />
+                    </a>
                     <GridListTileBar title={item.title}
                       actionIcon={
                       <i className={`material-icons ${classes.icon}`}
-                        id={item.recipeId}
+                        id={item.id}
                         onClick={deleteRecipe}>clear</i>
                       } />
                   </GridListTile>
