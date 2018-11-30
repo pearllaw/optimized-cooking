@@ -16,8 +16,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
         loader: 'babel-loader',
         options: {
           presets: [
-            '@babel/preset-react'
-          ]
+            '@babel/preset-react',
+            {
+              plugins: [
+                '@babel/plugin-proposal-class-properties'
+              ]
+            }
+          ],
         }
       }
     ],

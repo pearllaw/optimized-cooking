@@ -70,8 +70,8 @@ class MyRecipes extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(category) {
-
+  handleChange = meal => (e, expanded) => {
+    this.setState({ expanded: expanded ? meal : false })
   }
 
   render() {
