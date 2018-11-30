@@ -32,10 +32,16 @@ export default class ViewRecipe extends Component {
   }
 
   handleClick() {
+    const { mealCategory } = this.state
     this.setState({
       isFavorited: !this.state.isFavorited,
-      open: true
+      open: true,
     })
+    const checked = mealCategory.filter(meal => meal.checked)
+    if (this.state.isFavorited && checked) {
+      const updateSavedMeals = mealCategory.map(meal => Object.assign({}, meal, {checked: false}))
+      this.setState({ mealCategory: updateSavedMeals })
+    }
   }
 
   handleClose() {
@@ -69,7 +75,8 @@ export default class ViewRecipe extends Component {
       title: recipeInfo.title,
       recipeId: recipeInfo.id,
       image: recipeInfo.image,
-      saved: true
+      saved: true,
+      // mealCategory: mealCategory.filter(meal => meal.checked === true)
     }
     fetch('/my-recipes', {
         method: 'POST',
