@@ -45,6 +45,21 @@ export default class ViewRecipe extends Component {
   }
 
   handleClose() {
+    const { id } = this.state.view.params
+    const savedMeal = this.state.mealCategory.filter(meal => meal.checked)
+    const mealType = {
+      mealCategory: savedMeal[0].meal
+    }
+    fetch(`/my-recipes?recipeId=${id}`)
+      .then(res => res.json())
+      .then(data => data.map(recipe => {
+        const dataId = recipe.id
+        return fetch(`/my-recipes/${dataId}`, {
+          method: 'PATCH',
+          body: JSON.stringify(mealType),
+          headers: {'Content-Type': 'application/json; charset=utf-8'}
+        })
+      }))
     this.setState({ open: false })
   }
 
@@ -75,8 +90,7 @@ export default class ViewRecipe extends Component {
       title: recipeInfo.title,
       recipeId: recipeInfo.id,
       image: recipeInfo.image,
-      saved: true,
-      // mealCategory: mealCategory.filter(meal => meal.checked === true)
+      saved: true
     }
     fetch('/my-recipes', {
         method: 'POST',
