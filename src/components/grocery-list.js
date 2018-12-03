@@ -20,6 +20,7 @@ const styles = {
 }
 
 function GroceryList ({ classes, groceries, handleCheck }) {
+  if (!groceries.length) return null
   return (
     <Grid container
       alignItems="center"
@@ -27,7 +28,6 @@ function GroceryList ({ classes, groceries, handleCheck }) {
       spacing={40}
       className={classes.container}>
       <Typography variant="h3" align="center">Grocery List</Typography>
-
       {groceries.length > 0
         ? <Fragment>
             <Grid item>
