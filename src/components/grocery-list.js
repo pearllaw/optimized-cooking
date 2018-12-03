@@ -20,7 +20,6 @@ const styles = {
 }
 
 function GroceryList ({ classes, groceries, handleCheck }) {
-  if (!groceries.length) return null
   return (
     <Grid container
       alignItems="center"

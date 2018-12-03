@@ -88,7 +88,7 @@ function Instructions({ classes, recipeInfo, handleClick, isFavorited, saveRecip
             />
             </MuiThemeProvider>
             <Typography className={classes.subtitle} color="textSecondary">{`Servings: ${recipeInfo.servings}`}</Typography>
-            {recipeInfo.preparationMinutes !== undefined || 0 &&
+            {recipeInfo.preparationMinutes !== undefined || recipeInfo.preparationMinutes === 0 &&
             <Typography className={classes.subtitle}
               color="textSecondary">
               {`Prep Time: ${recipeInfo.preparationMinutes} minutes`}
