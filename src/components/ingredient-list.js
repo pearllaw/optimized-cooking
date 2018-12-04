@@ -11,6 +11,9 @@ const styles = theme => ({
     border: '1px solid', 
     borderRadius: '0.25rem' 
   },
+  form: {
+    fontSize: '1.1rem'
+  },
   input: {
     marginLeft: 15,
     width: '12%',
