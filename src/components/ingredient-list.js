@@ -6,11 +6,10 @@ const styles = theme => ({
   button: {
     color: theme.palette
   },
-  list: window.screen.availWidth < 760
-  ? { width: 260, border: '1px solid', borderRadius: '0.25rem' }
-  : { width: 560, border: '1px solid', borderRadius: '0.25rem' },
-  form: {
-    fontSize: '1.1rem'
+  list: { 
+    width: 560, 
+    border: '1px solid', 
+    borderRadius: '0.25rem' 
   },
   input: {
     marginLeft: 15,
@@ -27,8 +26,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiListItemText: {
       primary: {
-        fontSize: '1.1rem',
-        fontWeight: 500
+        fontSize: '1.1rem'
       }
     }
   },

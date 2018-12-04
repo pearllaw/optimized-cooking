@@ -20,7 +20,7 @@ const styles = {
     height: '100%',
     width: '100%',
     opacity: 0.45,
-    zIndex: -1000,
+    zIndex: -10,
     position: 'fixed'
   }
 }
