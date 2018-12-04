@@ -30,8 +30,8 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   overrides: {
-    MuiNotchedOutline: {
-      root: {
+    MuiOutlinedInput: {
+      notchedOutline: {
         borderColor: 'black'
       }
     }
