@@ -1,87 +1,50 @@
 import React from 'react'
-import { Typography, TextField, Button, withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { Typography, TextField, Button, withStyles, createMuiTheme, MuiThemeProvider, Tooltip } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
-const styles = {
+const styles = theme => ({
   container: {
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: 1000
   },
   title: {
     paddingTop: 100,
-    color: 'white'
-  },
-  root: {
-    color: 'white'
   },
   input: {
     display: 'inline-block',
     margin: '2rem'
   },
-  textField: window.screen.availWidth < 760
-  ? { width: 200 }
-  : { width: 500 },
+  textField: {
+    width: 500
+  },
   button: {
     marginTop: 21,
     marginLeft: 25
-  }
-}
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiFormLabel: {
-      root: {
-        color: 'white',
-        fontSize: '1.1rem',
-        fontWeight: 500,
-        '&$focused': {
-          color: 'white'
-        }
-      }
-    },
-    MuiNotchedOutline: {
-      focused: {
-        borderColor: 'white',
-        borderWidth: '1px'
-      }
-    },
-    MuiInputBase: {
-      root: {
-        color: 'white'
-      },
-      input: {
-        color: 'white',
-        fontSize: '1.1rem',
-        fontWeight: 500
-      }
-    },
-    MuiOutlinedInput: {
-      root: {
-        color: 'white'
-      },
-      notchedOutline: {
-        borderColor: 'white'
-      }
-    }
   },
-  typography: {
-    useNextVariants: true,
+  tooltip: {
+    maxWidth: 500,
+    fontSize: 14,
+    marginTop: 0
   }
 })
 
 function IngredientForm({ classes, handleSubmit }) {
+  const tip = `💡 For best results, specify each ingredient in detail (e.g. brie cheese)`
   return (
     <div className={classes.container}>
         <Typography variant="h3" align="center" className={classes.title}>What's in Your Fridge?</Typography>
+        <Tooltip classes={{tooltip: classes.tooltip}}
+          title={tip} 
+          placement="bottom-start" 
+          onOpen={setTimeout}>
         <form className={classes.input} onSubmit={handleSubmit}>
-          <MuiThemeProvider theme={theme}>
-            <TextField
-              className={classes.textField}
-              id="ingredient"
-              label="Add an ingredient"
-              margin="normal"
-              variant="outlined"
-              required />
-          </MuiThemeProvider>
+          <TextField
+            className={classes.textField}
+            id="ingredient"
+            label="Add an ingredient"
+            margin="normal"
+            variant="outlined"
+            required />
           <Button
             className={classes.button}
             type="submit"
@@ -92,6 +55,7 @@ function IngredientForm({ classes, handleSubmit }) {
             <AddIcon/>
           </Button>
         </form>
+        </Tooltip>
     </div>
   )
 }

@@ -7,21 +7,16 @@ const styles = theme => ({
     color: theme.palette
   },
   list: window.screen.availWidth < 760
-  ? { width: 260, border: '1px solid white', borderRadius: '0.25rem' }
-  : { width: 560, border: '1px solid white', borderRadius: '0.25rem' },
-  icon: {
-    color: 'white'
-  },
+  ? { width: 260, border: '1px solid', borderRadius: '0.25rem' }
+  : { width: 560, border: '1px solid', borderRadius: '0.25rem' },
   form: {
-    fontSize: '1.1rem',
-    color: 'white'
+    fontSize: '1.1rem'
   },
   input: {
     marginLeft: 15,
     width: '12%',
-    color: 'white',
     fontSize: '1.1rem',
-    borderBottom: '1px solid white'
+    borderBottom: '1px solid'
   }
 })
 
@@ -32,7 +27,6 @@ const theme = createMuiTheme({
   overrides: {
     MuiListItemText: {
       primary: {
-        color: '#fff',
         fontSize: '1.1rem',
         fontWeight: 500
       }

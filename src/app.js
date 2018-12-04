@@ -17,8 +17,11 @@ const styles = {
     backgroundImage: `url(${backgroundUrl})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    height: 767,
-    opacity: 0.85
+    height: '100%',
+    width: '100%',
+    opacity: 0.45,
+    zIndex: -1000,
+    position: 'fixed'
   }
 }
 
@@ -68,11 +71,10 @@ class Recipes extends Component {
     const { classes } = this.props
     return (
       <Fragment>
+        <div className={ path === 'list' || path === '' ? classes.background : null }></div>
         <Nav/>
-        <div className={ path === 'list' || path === '' ? classes.background : null }>
-          {this.renderView()}
-        </div>
-      </Fragment>
+        {this.renderView()}
+      </Fragment>    
     )
   }
 }
