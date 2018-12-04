@@ -30,12 +30,10 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   overrides: {
-    MuiOutlinedInput: {
+    MuiFormControl: {
       root: {
-        borderColor: 'black'
-      },
-      notchedOutline: {
-        borderColor: 'black'
+        border: '1px solid black',
+        borderRadius: '4px'
       }
     }
   },
@@ -53,8 +51,8 @@ function IngredientForm({ classes, handleSubmit }) {
           title={tip} 
           placement="bottom-start" 
           onOpen={setTimeout}>
-        <form className={classes.input} onSubmit={handleSubmit}>
         <MuiThemeProvider theme={theme}>
+        <form className={classes.input} onSubmit={handleSubmit}>
           <TextField
             className={classes.textField}
             id="ingredient"
@@ -62,7 +60,6 @@ function IngredientForm({ classes, handleSubmit }) {
             margin="normal"
             variant="outlined"
             required />
-          </MuiThemeProvider>
           <Button
             className={classes.button}
             type="submit"
@@ -73,6 +70,7 @@ function IngredientForm({ classes, handleSubmit }) {
             <AddIcon/>
           </Button>
         </form>
+        </MuiThemeProvider>
         </Tooltip>
     </div>
   )
